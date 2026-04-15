@@ -235,6 +235,21 @@
   .history-delta { font-size: 15px; font-weight: 800; }
   .delta-pos { color: var(--teal-dark); }
   .delta-neg { color: #e55; }
+  
+    .reset-btn {
+    width: 100%;
+    padding: 12px;
+    background: #fee2e2;
+    color: #b91c1c;
+    border: 2px dashed #f87171;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+    margin-top: 16px;
+    margin-bottom: 20px;
+  }
 
   /* ===== TOAST ===== */
   .toast {
@@ -414,6 +429,7 @@
     </div>
     <div class="section-title">📜 歷史紀錄</div>
     <div id="history-list"></div>
+	<button class="reset-btn" onclick="resetSystem()">⚠️ 重置所有紀錄</button>
   </div>
 </div>
 
@@ -578,7 +594,7 @@ function renderAll() {
   state.players.forEach((sp, i) => {
     document.getElementById("p"+i+"-avatar").textContent = PLAYERS[i].avatar;
     document.getElementById("p"+i+"-name").textContent = PLAYERS[i].name;
-    document.getElementById("p"+i+"-coins").textContent = "🪙 " + sp.coins;
+    document.getElementById("p"+i+"-coins").textContent = "💰 " + sp.coins;
   });
 
   renderTasks();
@@ -601,11 +617,10 @@ function renderTasks() {
       <div class="task-icon">${icon}</div>
       <div class="task-left">
         <div class="task-tags">
-          <span class="tag tag-daily">日常</span>
           <span class="tag ${tm.cls}">${tm.label}</span>
         </div>
         <div class="task-name">${t.name}</div>
-        <div class="task-meta">🪙 ${t.coins} 金幣 &nbsp;·&nbsp; 累計 ${count} 次</div>
+        <div class="task-meta">💰 ${t.coins} 金幣 &nbsp;·&nbsp; 累計 ${count} 次</div>
       </div>
       <button class="delete-btn" onclick="deleteTask('${t.id}')">🗑</button>
       ${done
@@ -629,7 +644,7 @@ function renderRewards() {
       <div class="reward-emoji">${r.emoji}</div>
       <div class="reward-info">
         <div class="reward-name">${r.name}</div>
-        <div class="reward-cost">🪙 需要 ${r.cost} 金幣 ${can ? '· 可兌換！' : ''}</div>
+        <div class="reward-cost">💰 需要 ${r.cost} 金幣 ${can ? '· 可兌換！' : ''}</div>
       </div>
       <button class="delete-btn" onclick="deleteReward('${r.id}')">🗑</button>
       <button class="redeem-btn" ${can?'':'disabled'} onclick="redeem('${r.id}','${r.name}',${r.cost})">
@@ -657,7 +672,7 @@ function renderHistory() {
         <div class="history-label">${h.label}</div>
         <div class="history-time">${h.time||''}</div>
       </div>
-      <div class="history-delta ${h.delta>0?'delta-pos':'delta-neg'}">${h.delta>0?'+':''}${h.delta} 🪙</div>
+      <div class="history-delta ${h.delta>0?'delta-pos':'delta-neg'}">${h.delta>0?'+':''}${h.delta} 💰</div>
     </div>`
   ).join("");
 }
@@ -679,7 +694,7 @@ function checkin(tid) {
   ps.history.push({ label:"完成："+task.name, delta:task.coins, time:timeStr() });
   save();
   renderAll();
-  showToast("+" + task.coins + " 🪙  打卡成功！");
+  showToast("+" + task.coins + " 💰  打卡成功！");
 }
 
 function redeem(rid, name, cost) {
@@ -703,6 +718,13 @@ function deleteReward(rid) {
   if (!confirm("確定要刪除這個獎品嗎？")) return;
   state.rewards = state.rewards.filter(r=>r.id!==rid);
   save(); renderRewards();
+}
+
+function resetSystem() {
+  if (confirm("確定要清空所有紀錄嗎？這將會刪除所有玩家的金幣與歷史紀錄！")) {
+    localStorage.removeItem("kidreward_v3");
+    location.reload();
+  }
 }
 
 // ============================================================
