@@ -427,9 +427,13 @@
         <div class="stat-label">今日完成</div>
       </div>
     </div>
-    <div class="section-title">📜 歷史紀錄</div>
+	<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+      <div class="section-title" style="margin-bottom: 0;">📜 歷史紀錄</div>
+      <button onclick="resetSystem()" style="background: #fee2e2; color: #b91c1c; border: 1px solid #f87171; padding: 5px 12px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer;">
+        ⚠️ 重置測試紀錄
+      </button>
+    </div>
     <div id="history-list"></div>
-	<button class="reset-btn" onclick="resetSystem()">⚠️ 重置所有紀錄</button>
   </div>
 </div>
 
