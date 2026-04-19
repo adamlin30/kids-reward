@@ -10,391 +10,145 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --teal: #2ec4b6;
-    --teal-dark: #1a9e92;
-    --teal-light: #e0f7f5;
-    --gold: #f5c518;
-    --gold-dark: #c9a000;
-    --gold-light: #fff8dc;
-    --bg: #f0faf9;
-    --card: #ffffff;
-    --text: #1a2e2d;
-    --muted: #7a9e9b;
-    --border: #d4eeeb;
-    --radius: 18px;
-    --radius-sm: 10px;
+    --teal:#2ec4b6; --teal-dark:#1a9e92; --teal-light:#e0f7f5;
+    --gold:#f5c518; --gold-dark:#c9a000;
+    --bg:#f0faf9; --card:#ffffff; --text:#1a2e2d; --muted:#7a9e9b; --border:#d4eeeb;
+    --radius:18px; --radius-sm:10px;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-  body {
-    font-family: 'Nunito', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    padding-bottom: 80px;
-  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:90px;}
 
-  /* ===== TOP PLAYER SWITCHER ===== */
-  .player-switcher {
-    display: flex;
-    gap: 10px;
-    padding: 16px 16px 0;
-  }
-  .player-btn {
-    flex: 1;
-    background: var(--card);
-    border: 2px solid var(--border);
-    border-radius: 14px;
-    padding: 10px 12px;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: center;
-  }
-  .player-btn.active {
-    border-color: var(--teal);
-    background: var(--teal-light);
-  }
-  .player-btn .p-avatar { font-size: 24px; }
-  .player-btn .p-name { font-size: 14px; font-weight: 700; color: var(--text); margin-top: 2px; }
-  .player-btn .p-coins { font-size: 12px; color: var(--muted); margin-top: 1px; }
-  .player-btn.active .p-name { color: var(--teal-dark); }
+  .player-switcher{display:flex;gap:10px;padding:16px 16px 0;}
+  .player-btn{flex:1;background:var(--card);border:2px solid var(--border);border-radius:14px;padding:10px 12px;cursor:pointer;transition:all .2s;text-align:center;}
+  .player-btn.active{border-color:var(--teal);background:var(--teal-light);}
+  .player-btn .p-avatar{font-size:24px;}
+  .player-btn .p-name{font-size:14px;font-weight:700;color:var(--text);margin-top:2px;}
+  .player-btn .p-coins{font-size:12px;color:var(--muted);margin-top:1px;}
+  .player-btn.active .p-name{color:var(--teal-dark);}
 
-  /* ===== HEADER ===== */
-  .header {
-    margin: 12px 16px 0;
-    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
-    border-radius: 22px;
-    padding: 18px 20px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::before {
-    content: '';
-    position: absolute;
-    right: -20px; top: -20px;
-    width: 120px; height: 120px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 50%;
-  }
-  .header-avatar { font-size: 42px; line-height: 1; }
-  .header-info { flex: 1; }
-  .header-name { font-size: 22px; font-weight: 800; color: white; }
-  .header-sub { font-size: 12px; color: rgba(255,255,255,0.75); margin-top: 2px; }
-  .coin-badge {
-    background: var(--gold);
-    border-radius: 50px;
-    padding: 8px 16px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-weight: 800;
-    font-size: 18px;
-    color: var(--gold-dark);
-    box-shadow: 0 3px 10px rgba(245,197,24,0.4);
-  }
+  .header{margin:12px 16px 0;background:linear-gradient(135deg,var(--teal) 0%,var(--teal-dark) 100%);border-radius:22px;padding:18px 20px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;}
+  .header::before{content:'';position:absolute;right:-20px;top:-20px;width:120px;height:120px;background:rgba(255,255,255,.08);border-radius:50%;}
+  .header-avatar{font-size:42px;line-height:1;}
+  .header-info{flex:1;}
+  .header-name{font-size:22px;font-weight:800;color:white;}
+  .header-sub{font-size:12px;color:rgba(255,255,255,.75);margin-top:2px;}
+  .coin-badge{background:var(--gold);border-radius:50px;padding:8px 16px;display:flex;align-items:center;gap:5px;font-weight:800;font-size:18px;color:var(--gold-dark);box-shadow:0 3px 10px rgba(245,197,24,.4);}
 
-  /* ===== TABS ===== */
-  .tabs {
-    display: flex;
-    gap: 8px;
-    padding: 14px 16px 0;
-  }
-  .tab {
-    flex: 1;
-    padding: 10px 6px;
-    border-radius: 50px;
-    border: 2px solid var(--border);
-    background: var(--card);
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    text-align: center;
-    color: var(--muted);
-    font-family: 'Nunito', sans-serif;
-    transition: all 0.2s;
-  }
-  .tab.active {
-    background: var(--teal);
-    color: white;
-    border-color: var(--teal);
-  }
+  .tabs{display:flex;gap:8px;padding:14px 16px 0;}
+  .tab{flex:1;padding:10px 6px;border-radius:50px;border:2px solid var(--border);background:var(--card);font-size:13px;font-weight:700;cursor:pointer;text-align:center;color:var(--muted);font-family:'Nunito',sans-serif;transition:all .2s;}
+  .tab.active{background:var(--teal);color:white;border-color:var(--teal);}
 
-  /* ===== CONTENT ===== */
-  .content { padding: 14px 16px 0; }
-  .page { display: none; }
-  .page.active { display: block; }
-  .section-title {
-    font-size: 17px;
-    font-weight: 800;
-    color: var(--text);
-    margin-bottom: 12px;
-  }
+  .content{padding:14px 16px 0;}
+  .page{display:none;}
+  .page.active{display:block;}
+  .section-title{font-size:17px;font-weight:800;color:var(--text);margin-bottom:12px;}
 
-  /* ===== TASK CARD ===== */
-  .task-card {
-    background: var(--card);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 14px 16px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    transition: all 0.2s;
-  }
-  .task-card.done { opacity: 0.5; }
-  .task-icon { font-size: 28px; width: 44px; text-align: center; flex-shrink: 0; }
-  .task-left { flex: 1; }
-  .task-tags { display: flex; gap: 5px; margin-bottom: 5px; flex-wrap: wrap; }
-  .tag {
-    font-size: 11px;
-    font-weight: 700;
-    padding: 2px 9px;
-    border-radius: 20px;
-  }
-  .tag-daily { background: #dbeafe; color: #1e4fad; }
-  .tag-sport { background: #fce7f3; color: #9d174d; }
-  .tag-school { background: #ede9fe; color: #5b21b6; }
-  .tag-read { background: #d1fae5; color: #065f46; }
-  .tag-home { background: #fef3c7; color: #92400e; }
-  .tag-music { background: #fce7f3; color: #86198f; }
-  .task-name { font-size: 15px; font-weight: 700; color: var(--text); }
-  .task-meta { font-size: 12px; color: var(--muted); margin-top: 3px; }
-  .checkin-btn {
-    background: var(--teal);
-    color: white;
-    border: none;
-    border-radius: 50px;
-    padding: 9px 18px;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: 'Nunito', sans-serif;
-    transition: all 0.15s;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .checkin-btn:active { transform: scale(0.93); }
-  .checkin-btn.done-btn {
-    background: #e8f5f4;
-    color: var(--teal-dark);
-    cursor: default;
-  }
+  /* Task cards */
+  .task-card{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+  .task-icon{font-size:26px;width:40px;text-align:center;flex-shrink:0;}
+  .task-left{flex:1;min-width:0;}
+  .task-tags{display:flex;gap:5px;margin-bottom:5px;flex-wrap:wrap;}
+  .tag{font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;}
+  .tag-study{background:#dbeafe;color:#1e4fad;}
+  .tag-chore{background:#fef3c7;color:#92400e;}
+  .tag-sport{background:#fce7f3;color:#9d174d;}
+  .tag-other{background:#f3f4f6;color:#374151;}
+  .tag-shared{background:#d1fae5;color:#065f46;}
+  .tag-abby{background:#ede9fe;color:#5b21b6;}
+  .tag-adam{background:#ffedd5;color:#9a3412;}
+  .task-name{font-size:15px;font-weight:700;color:var(--text);}
+  .task-meta{font-size:12px;color:var(--muted);margin-top:3px;}
+  .task-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0;}
+  .checkin-btn{background:var(--teal);color:white;border:none;border-radius:50px;padding:8px 16px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .15s;white-space:nowrap;}
+  .checkin-btn:active{transform:scale(.93);}
+  .count-row{display:flex;align-items:center;gap:5px;}
+  .count-badge{background:var(--teal-light);color:var(--teal-dark);font-size:12px;font-weight:800;border-radius:20px;padding:2px 10px;}
+  .limit-badge{background:#f3f4f6;color:#6b7280;font-size:11px;font-weight:700;border-radius:20px;padding:2px 8px;}
+  .checkin-btn.maxed{background:#e8f5f4;color:var(--teal-dark);cursor:default;}
 
-  /* ===== REWARD CARD ===== */
-  .reward-card {
-    background: var(--card);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 14px 16px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .reward-emoji { font-size: 32px; width: 48px; text-align: center; flex-shrink: 0; }
-  .reward-info { flex: 1; }
-  .reward-name { font-size: 15px; font-weight: 700; color: var(--text); }
-  .reward-cost { font-size: 13px; color: var(--muted); margin-top: 3px; }
-  .redeem-btn {
-    background: var(--gold);
-    color: var(--gold-dark);
-    border: none;
-    border-radius: 50px;
-    padding: 9px 16px;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: 'Nunito', sans-serif;
-    transition: all 0.15s;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .redeem-btn:active { transform: scale(0.93); }
-  .redeem-btn:disabled {
-    background: #f0f0f0;
-    color: #aaa;
-    cursor: default;
-  }
+  /* Reward cards */
+  .reward-card{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:12px;}
+  .reward-emoji{font-size:32px;width:48px;text-align:center;flex-shrink:0;}
+  .reward-info{flex:1;}
+  .reward-name{font-size:15px;font-weight:700;color:var(--text);}
+  .reward-cost{font-size:13px;color:var(--muted);margin-top:3px;}
+  .reward-btns{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+  .redeem-btn{background:var(--gold);color:var(--gold-dark);border:none;border-radius:50px;padding:9px 16px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .15s;white-space:nowrap;}
+  .redeem-btn:active{transform:scale(.93);}
+  .redeem-btn:disabled{background:#f0f0f0;color:#aaa;cursor:default;}
 
-  /* ===== HISTORY ===== */
-  .history-item {
-    background: var(--card);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 10px 14px;
-    margin-bottom: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .history-label { font-size: 14px; color: var(--text); }
-  .history-time { font-size: 11px; color: var(--muted); margin-top: 2px; }
-  .history-delta { font-size: 15px; font-weight: 800; }
-  .delta-pos { color: var(--teal-dark); }
-  .delta-neg { color: #e55; }
-  
-    .reset-btn {
-    width: 100%;
-    padding: 12px;
-    background: #fee2e2;
-    color: #b91c1c;
-    border: 2px dashed #f87171;
-    border-radius: var(--radius);
-    font-size: 14px;
-    font-weight: 700;
-    font-family: 'Nunito', sans-serif;
-    cursor: pointer;
-    margin-top: 16px;
-    margin-bottom: 20px;
-  }
+  /* History */
+  .history-item{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;}
+  .history-label{font-size:14px;color:var(--text);}
+  .history-time{font-size:11px;color:var(--muted);margin-top:2px;}
+  .history-delta{font-size:15px;font-weight:800;}
+  .delta-pos{color:var(--teal-dark);}
+  .delta-neg{color:#e55;}
 
-  /* ===== TOAST ===== */
-  .toast {
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: var(--teal-dark);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 50px;
-    font-size: 15px;
-    font-weight: 700;
-    font-family: 'Nunito', sans-serif;
-    opacity: 0;
-    transition: all 0.3s;
-    pointer-events: none;
-    z-index: 999;
-    white-space: nowrap;
-  }
-  .toast.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
+  .stats-row{display:flex;gap:10px;margin-bottom:16px;}
+  .stat-card{flex:1;background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:12px;text-align:center;}
+  .stat-val{font-size:22px;font-weight:800;color:var(--teal-dark);}
+  .stat-label{font-size:11px;color:var(--muted);margin-top:2px;}
 
-  /* ===== ADMIN PANEL ===== */
-  .admin-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 100;
-    align-items: flex-end;
-    justify-content: center;
-  }
-  .admin-overlay.open { display: flex; }
-  .admin-panel {
-    background: var(--card);
-    border-radius: 28px 28px 0 0;
-    padding: 24px 20px 40px;
-    width: 100%;
-    max-width: 480px;
-    max-height: 80vh;
-    overflow-y: auto;
-  }
-  .admin-title { font-size: 18px; font-weight: 800; margin-bottom: 16px; }
-  .admin-row { margin-bottom: 12px; }
-  .admin-row label { font-size: 13px; font-weight: 700; color: var(--muted); display: block; margin-bottom: 4px; }
-  .admin-row input, .admin-row select {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    font-size: 14px;
-    font-family: 'Nunito', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-  }
-  .admin-save {
-    width: 100%;
-    padding: 14px;
-    background: var(--teal);
-    color: white;
-    border: none;
-    border-radius: var(--radius);
-    font-size: 16px;
-    font-weight: 700;
-    font-family: 'Nunito', sans-serif;
-    cursor: pointer;
-    margin-top: 8px;
-  }
-  .admin-cancel {
-    width: 100%;
-    padding: 12px;
-    background: transparent;
-    color: var(--muted);
-    border: none;
-    font-size: 14px;
-    font-weight: 700;
-    font-family: 'Nunito', sans-serif;
-    cursor: pointer;
-    margin-top: 4px;
-  }
-  .add-btn {
-    width: 100%;
-    padding: 12px;
-    background: var(--teal-light);
-    color: var(--teal-dark);
-    border: 2px dashed var(--teal);
-    border-radius: var(--radius);
-    font-size: 14px;
-    font-weight: 700;
-    font-family: 'Nunito', sans-serif;
-    cursor: pointer;
-    margin-bottom: 14px;
-    margin-top: 4px;
-  }
-  .delete-btn {
-    background: none;
-    border: none;
-    color: #e55;
-    font-size: 18px;
-    cursor: pointer;
-    padding: 4px 8px;
-    flex-shrink: 0;
-  }
-  .empty-msg { color: var(--muted); font-size: 14px; padding: 20px 0; text-align: center; }
-  .stats-row { display: flex; gap: 10px; margin-bottom: 16px; }
-  .stat-card {
-    flex: 1;
-    background: var(--card);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 12px;
-    text-align: center;
-  }
-  .stat-val { font-size: 22px; font-weight: 800; color: var(--teal-dark); }
-  .stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  /* Reset button */
+  .reset-btn{width:100%;padding:12px;background:#fff5f5;color:#c53030;border:2px solid #fed7d7;border-radius:var(--radius);font-size:14px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;margin-top:8px;}
+
+  /* Add button */
+  .add-btn{width:100%;padding:12px;background:var(--teal-light);color:var(--teal-dark);border:2px dashed var(--teal);border-radius:var(--radius);font-size:14px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;margin-bottom:14px;margin-top:4px;}
+
+  /* Deduct button */
+  .deduct-section{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .deduct-info .deduct-title{font-size:15px;font-weight:700;color:var(--text);}
+  .deduct-info .deduct-sub{font-size:12px;color:var(--muted);margin-top:2px;}
+  .deduct-btn{background:#fff5f5;color:#c53030;border:2px solid #fed7d7;border-radius:50px;padding:9px 16px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;white-space:nowrap;transition:all .15s;flex-shrink:0;}
+  .deduct-btn:active{transform:scale(.93);}
+
+  .delete-btn{background:none;border:none;color:#ccc;font-size:15px;cursor:pointer;padding:4px 2px;flex-shrink:0;}
+  .delete-btn:hover{color:#e55;}
+  .empty-msg{color:var(--muted);font-size:14px;padding:20px 0;text-align:center;}
+
+  /* Overlays */
+  .admin-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;align-items:flex-end;justify-content:center;}
+  .admin-overlay.open{display:flex;}
+  .admin-panel{background:var(--card);border-radius:28px 28px 0 0;padding:24px 20px 44px;width:100%;max-width:480px;max-height:85vh;overflow-y:auto;}
+  .admin-title{font-size:18px;font-weight:800;margin-bottom:16px;}
+  .admin-row{margin-bottom:14px;}
+  .admin-row label{font-size:13px;font-weight:700;color:var(--muted);display:block;margin-bottom:5px;}
+  .admin-row input,.admin-row select{width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:14px;font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);}
+  .admin-row .hint{font-size:11px;color:var(--muted);margin-top:4px;}
+  .assignee-row{display:flex;gap:8px;}
+  .assignee-btn{flex:1;padding:10px 4px;border:2px solid var(--border);border-radius:var(--radius-sm);background:var(--card);font-size:12px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;text-align:center;color:var(--muted);transition:all .15s;}
+  .assignee-btn.sel{border-color:var(--teal);background:var(--teal-light);color:var(--teal-dark);}
+  .admin-save{width:100%;padding:14px;background:var(--teal);color:white;border:none;border-radius:var(--radius);font-size:16px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;margin-top:8px;}
+  .admin-save.danger{background:#c53030;}
+  .admin-cancel{width:100%;padding:12px;background:transparent;color:var(--muted);border:none;font-size:14px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;margin-top:4px;}
+
+  .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--teal-dark);color:white;padding:12px 24px;border-radius:50px;font-size:15px;font-weight:700;font-family:'Nunito',sans-serif;opacity:0;transition:all .3s;pointer-events:none;z-index:999;white-space:nowrap;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 </style>
 </head>
 <body>
 
 <div class="player-switcher">
   <div class="player-btn active" id="p0-btn" onclick="switchPlayer(0)">
-    <div class="p-avatar" id="p0-avatar">🌸</div>
-    <div class="p-name" id="p0-name">Abby</div>
-    <div class="p-coins" id="p0-coins">🪙 0</div>
+    <div class="p-avatar">🥷</div>
+    <div class="p-name">Abby</div>
+    <div class="p-coins" id="p0-coins">💰 0</div>
   </div>
   <div class="player-btn" id="p1-btn" onclick="switchPlayer(1)">
-    <div class="p-avatar" id="p1-avatar">⚡</div>
-    <div class="p-name" id="p1-name">Adam</div>
-    <div class="p-coins" id="p1-coins">🪙 0</div>
+    <div class="p-avatar">⚔️</div>
+    <div class="p-name">Adam</div>
+    <div class="p-coins" id="p1-coins">💰 0</div>
   </div>
 </div>
 
 <div class="header">
-  <div class="header-avatar" id="cur-avatar">🌸</div>
+  <div class="header-avatar" id="cur-avatar">🥷</div>
   <div class="header-info">
     <div class="header-name" id="cur-name">Abby</div>
     <div class="header-sub" id="cur-sub">今日任務進行中</div>
   </div>
-  <div class="coin-badge">
-    <span>🪙</span>
-    <span id="cur-coins">0</span>
-  </div>
+  <div class="coin-badge">💰 <span id="cur-coins">0</span></div>
 </div>
 
 <div class="tabs">
@@ -404,35 +158,36 @@
 </div>
 
 <div class="content">
+  <!-- Tasks page -->
   <div id="page-tasks" class="page active">
-    <div class="section-title">📋 每日任務</div>
+    <div class="section-title">📋 今日任務</div>
     <div id="task-list"></div>
     <button class="add-btn" onclick="openAddTask()">＋ 新增任務</button>
   </div>
 
+  <!-- Rewards page -->
   <div id="page-rewards" class="page">
+    <!-- Deduct coins section -->
+    <div class="deduct-section">
+      <div class="deduct-info">
+        <div class="deduct-title">🔒 家長扣除金幣</div>
+        <div class="deduct-sub">手動扣除指定金額（懲罰或調整用）</div>
+      </div>
+      <button class="deduct-btn" onclick="openDeduct()">扣除金幣</button>
+    </div>
     <div class="section-title">🎁 可兌換獎品</div>
     <div id="reward-list"></div>
     <button class="add-btn" onclick="openAddReward()">＋ 新增獎品</button>
   </div>
 
+  <!-- History page -->
   <div id="page-history" class="page">
     <div class="stats-row">
-      <div class="stat-card">
-        <div class="stat-val" id="stat-total">0</div>
-        <div class="stat-label">累計金幣</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-val" id="stat-tasks">0</div>
-        <div class="stat-label">今日完成</div>
-      </div>
+      <div class="stat-card"><div class="stat-val" id="stat-total">0</div><div class="stat-label">累計金幣</div></div>
+      <div class="stat-card"><div class="stat-val" id="stat-tasks">0</div><div class="stat-label">今日打卡次數</div></div>
     </div>
-	<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-      <div class="section-title" style="margin-bottom: 0;">📜 歷史紀錄</div>
-      <button onclick="resetSystem()" style="background: #fee2e2; color: #b91c1c; border: 1px solid #f87171; padding: 5px 12px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer;">
-        ⚠️ 重置測試紀錄
-      </button>
-    </div>
+    <button class="reset-btn" onclick="openReset()">🔄 重置今日打卡紀錄</button>
+    <div class="section-title" style="margin-top:14px;">📜 歷史紀錄</div>
     <div id="history-list"></div>
   </div>
 </div>
@@ -440,26 +195,38 @@
 <!-- Add Task Panel -->
 <div class="admin-overlay" id="task-overlay">
   <div class="admin-panel">
-    <div class="admin-title">新增任務</div>
+    <div class="admin-title">➕ 新增任務</div>
     <div class="admin-row">
       <label>任務名稱</label>
-      <input type="text" id="new-task-name" placeholder="例：寫日記" />
+      <input type="text" id="nt-name" placeholder="例：寫評量1回" />
     </div>
     <div class="admin-row">
       <label>分類</label>
-      <select id="new-task-cat">
-        <option value="music">🎵 音樂</option>
+      <select id="nt-cat">
+        <option value="study">📚 學習</option>
+        <option value="chore">🏠 家務</option>
         <option value="sport">🏃 運動</option>
-        <option value="school">📚 功課</option>
-        <option value="read">📖 閱讀</option>
-        <option value="home">🏠 家務</option>
+        <option value="other">💡 其他</option>
       </select>
     </div>
     <div class="admin-row">
-      <label>獎勵金幣</label>
-      <input type="number" id="new-task-coins" value="10" min="1" />
+      <label>獎勵金幣（每次打卡）</label>
+      <input type="number" id="nt-coins" value="10" min="1" />
     </div>
-    <button class="admin-save" onclick="saveNewTask()">新增</button>
+    <div class="admin-row">
+      <label>每日打卡上限次數（0 = 不限制）</label>
+      <input type="number" id="nt-limit" value="0" min="0" />
+      <div class="hint">填 0 代表無限次，每次打卡都給金幣</div>
+    </div>
+    <div class="admin-row">
+      <label>指派給誰</label>
+      <div class="assignee-row">
+        <button class="assignee-btn sel" id="asgn-both" onclick="setAssign('both')">🥷⚔️ 兩人共用</button>
+        <button class="assignee-btn" id="asgn-abby" onclick="setAssign('abby')">🥷 Abby</button>
+        <button class="assignee-btn" id="asgn-adam" onclick="setAssign('adam')">⚔️ Adam</button>
+      </div>
+    </div>
+    <button class="admin-save" onclick="saveNewTask()">新增任務</button>
     <button class="admin-cancel" onclick="closeOverlays()">取消</button>
   </div>
 </div>
@@ -467,20 +234,52 @@
 <!-- Add Reward Panel -->
 <div class="admin-overlay" id="reward-overlay">
   <div class="admin-panel">
-    <div class="admin-title">新增獎品</div>
+    <div class="admin-title">➕ 新增獎品</div>
     <div class="admin-row">
       <label>獎品名稱</label>
-      <input type="text" id="new-reward-name" placeholder="例：買珍珠奶茶" />
+      <input type="text" id="nr-name" placeholder="例：買珍珠奶茶" />
     </div>
     <div class="admin-row">
       <label>Emoji 圖示</label>
-      <input type="text" id="new-reward-emoji" placeholder="例：🧋" />
+      <input type="text" id="nr-emoji" placeholder="例：🧋" />
     </div>
     <div class="admin-row">
       <label>兌換所需金幣</label>
-      <input type="number" id="new-reward-cost" value="50" min="1" />
+      <input type="number" id="nr-cost" value="50" min="1" />
     </div>
-    <button class="admin-save" onclick="saveNewReward()">新增</button>
+    <button class="admin-save" onclick="saveNewReward()">新增獎品</button>
+    <button class="admin-cancel" onclick="closeOverlays()">取消</button>
+  </div>
+</div>
+
+<!-- Deduct Coins Panel -->
+<div class="admin-overlay" id="deduct-overlay">
+  <div class="admin-panel">
+    <div class="admin-title">🔒 家長扣除金幣</div>
+    <div class="admin-row">
+      <label>目前金幣：<span id="deduct-cur-coins" style="color:var(--teal-dark);font-weight:800;"></span></label>
+    </div>
+    <div class="admin-row">
+      <label>扣除金幣數量</label>
+      <input type="number" id="deduct-amount" value="10" min="1" />
+    </div>
+    <div class="admin-row">
+      <label>原因（選填）</label>
+      <input type="text" id="deduct-reason" placeholder="例：違規使用3C" />
+    </div>
+    <button class="admin-save danger" onclick="confirmDeduct()">確認扣除</button>
+    <button class="admin-cancel" onclick="closeOverlays()">取消</button>
+  </div>
+</div>
+
+<!-- Reset Confirmation Panel -->
+<div class="admin-overlay" id="reset-overlay">
+  <div class="admin-panel">
+    <div class="admin-title">🔄 重置今日打卡</div>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:20px;line-height:1.6;">
+      這將清除 <strong id="reset-player-name" style="color:var(--text);"></strong> 今日的所有打卡紀錄（金幣不會歸還），確定要繼續嗎？
+    </p>
+    <button class="admin-save danger" onclick="confirmReset()">確認重置</button>
     <button class="admin-cancel" onclick="closeOverlays()">取消</button>
   </div>
 </div>
@@ -488,16 +287,14 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// ============================================================
-// DEFAULT DATA — edit these arrays to change initial content
-// ============================================================
+// ── DEFAULT DATA ──────────────────────────────────────────
 const DEFAULT_TASKS = [
-  { id:"t1", name:"練習鋼琴20分鐘", cat:"music", coins:10 },
-  { id:"t2", name:"練習鋼琴30分鐘", cat:"music", coins:20 },
-  { id:"t3", name:"練習鋼琴40分鐘", cat:"music", coins:40 },
-  { id:"t4", name:"運動1小時",       cat:"sport", coins:30 },
-  { id:"t5", name:"寫評量1回",       cat:"school", coins:10 },
-  { id:"t6", name:"念英文",          cat:"read",  coins:10 },
+  { id:"t1", name:"練習鋼琴20分鐘", cat:"study", coins:10, limit:1, assignee:"abby" },
+  { id:"t2", name:"練習鋼琴30分鐘", cat:"study", coins:20, limit:1, assignee:"abby" },
+  { id:"t3", name:"練習鋼琴40分鐘", cat:"study", coins:40, limit:1, assignee:"abby" },
+  { id:"t4", name:"運動1小時",       cat:"sport", coins:30, limit:1, assignee:"both" },
+  { id:"t5", name:"寫評量1回",       cat:"study", coins:10, limit:0, assignee:"both" },
+  { id:"t6", name:"念英文",          cat:"study", coins:10, limit:0, assignee:"both" },
 ];
 
 const DEFAULT_REWARDS = [
@@ -505,62 +302,45 @@ const DEFAULT_REWARDS = [
 ];
 
 const PLAYERS = [
-  { name:"Abby", avatar:"🌸" },
-  { name:"Adam", avatar:"⚡" },
+  { name:"Abby", avatar:"🥷", key:"abby" },
+  { name:"Adam", avatar:"⚔️", key:"adam" },
 ];
 
-// ============================================================
-// TAG CONFIG
-// ============================================================
-const TAG_MAP = {
-  music:  { cls:"tag-music",  label:"音樂" },
-  sport:  { cls:"tag-sport",  label:"運動" },
-  school: { cls:"tag-school", label:"功課" },
-  read:   { cls:"tag-read",   label:"閱讀" },
-  home:   { cls:"tag-home",   label:"家務" },
+const CAT = {
+  study: { cls:"tag-study", label:"學習", icon:"📚" },
+  chore: { cls:"tag-chore", label:"家務", icon:"🏠" },
+  sport: { cls:"tag-sport", label:"運動", icon:"🏃" },
+  other: { cls:"tag-other", label:"其他", icon:"💡" },
 };
 
-const CAT_ICON = {
-  music:"🎵", sport:"🏃", school:"📚", read:"📖", home:"🏠"
-};
-
-// ============================================================
-// STATE
-// ============================================================
+// ── STATE ─────────────────────────────────────────────────
 const today = new Date().toDateString();
 let curPlayer = 0;
+let newTaskAssign = "both";
 
 function loadState() {
   try {
-    const raw = localStorage.getItem("kidreward_v3");
+    const raw = localStorage.getItem("kidreward_v4");
     if (raw) return JSON.parse(raw);
   } catch(e) {}
   return {
-    tasks: JSON.parse(JSON.stringify(DEFAULT_TASKS)),
+    tasks:   JSON.parse(JSON.stringify(DEFAULT_TASKS)),
     rewards: JSON.parse(JSON.stringify(DEFAULT_REWARDS)),
-    players: PLAYERS.map(() => ({ coins:0, earned:0, done:{}, lastDay:"", history:[] }))
+    players: PLAYERS.map(() => ({ coins:0, earned:0, counts:{}, lastDay:"", history:[] }))
   };
 }
 
-function save() {
-  localStorage.setItem("kidreward_v3", JSON.stringify(state));
-}
+function persist() { localStorage.setItem("kidreward_v4", JSON.stringify(state)); }
 
 let state = loadState();
-// Ensure players array length matches
 while (state.players.length < PLAYERS.length)
-  state.players.push({ coins:0, earned:0, done:{}, lastDay:"", history:[] });
+  state.players.push({ coins:0, earned:0, counts:{}, lastDay:"", history:[] });
 
 function resetDailyIfNeeded(ps) {
-  if (ps.lastDay !== today) {
-    ps.done = {};
-    ps.lastDay = today;
-  }
+  if (ps.lastDay !== today) { ps.counts = {}; ps.lastDay = today; }
 }
 
-// ============================================================
-// NAVIGATION
-// ============================================================
+// ── NAVIGATION ────────────────────────────────────────────
 function switchPlayer(idx) {
   curPlayer = idx;
   document.getElementById("p0-btn").classList.toggle("active", idx===0);
@@ -569,35 +349,28 @@ function switchPlayer(idx) {
 }
 
 function showPage(name) {
-  ["tasks","rewards","history"].forEach(p => {
-    document.getElementById("page-"+p).classList.toggle("active", p===name);
-  });
-  document.querySelectorAll(".tab").forEach((t,i) => {
-    t.classList.toggle("active", ["tasks","rewards","history"][i]===name);
-  });
-  if (name === "history") renderHistory();
+  ["tasks","rewards","history"].forEach(p =>
+    document.getElementById("page-"+p).classList.toggle("active", p===name));
+  document.querySelectorAll(".tab").forEach((t,i) =>
+    t.classList.toggle("active", ["tasks","rewards","history"][i]===name));
+  if (name==="history") renderHistory();
 }
 
-// ============================================================
-// RENDER
-// ============================================================
+// ── RENDER ────────────────────────────────────────────────
 function renderAll() {
   const ps = state.players[curPlayer];
   resetDailyIfNeeded(ps);
   const p = PLAYERS[curPlayer];
 
-  // Header
   document.getElementById("cur-avatar").textContent = p.avatar;
-  document.getElementById("cur-name").textContent = p.name;
-  document.getElementById("cur-coins").textContent = ps.coins;
-  const doneCount = Object.keys(ps.done).filter(k => !k.includes("_count")).length;
-  document.getElementById("cur-sub").textContent =
-    doneCount > 0 ? `今日已完成 ${doneCount} 項任務！` : "今日任務進行中";
+  document.getElementById("cur-name").textContent   = p.name;
+  document.getElementById("cur-coins").textContent  = ps.coins;
 
-  // Switcher coins
-  state.players.forEach((sp, i) => {
-    document.getElementById("p"+i+"-avatar").textContent = PLAYERS[i].avatar;
-    document.getElementById("p"+i+"-name").textContent = PLAYERS[i].name;
+  const totalCheckins = Object.values(ps.counts||{}).reduce((a,b)=>a+b,0);
+  document.getElementById("cur-sub").textContent =
+    totalCheckins > 0 ? `今日已打卡 ${totalCheckins} 次！` : "今日任務進行中";
+
+  state.players.forEach((sp,i) => {
     document.getElementById("p"+i+"-coins").textContent = "💰 " + sp.coins;
   });
 
@@ -606,31 +379,48 @@ function renderAll() {
 }
 
 function renderTasks() {
-  const ps = state.players[curPlayer];
-  const el = document.getElementById("task-list");
-  if (!state.tasks.length) {
+  const ps   = state.players[curPlayer];
+  const pkey = PLAYERS[curPlayer].key;
+  const el   = document.getElementById("task-list");
+  const visible = state.tasks.filter(t => t.assignee==="both" || t.assignee===pkey);
+
+  if (!visible.length) {
     el.innerHTML = `<div class="empty-msg">還沒有任務，點下方新增吧！</div>`;
     return;
   }
-  el.innerHTML = state.tasks.map(t => {
-    const done = !!ps.done[t.id];
-    const tm = TAG_MAP[t.cat] || TAG_MAP.school;
-    const icon = CAT_ICON[t.cat] || "📌";
-    const count = ps.done[t.id+"_count"] || 0;
-    return `<div class="task-card ${done?'done':''}">
-      <div class="task-icon">${icon}</div>
+
+  el.innerHTML = visible.map(t => {
+    const c     = CAT[t.cat] || CAT.other;
+    const done  = ps.counts[t.id] || 0;
+    const lim   = t.limit || 0;
+    const maxed = lim > 0 && done >= lim;
+    const asgnTag = t.assignee==="both"
+      ? `<span class="tag tag-shared">共用</span>`
+      : t.assignee==="abby"
+        ? `<span class="tag tag-abby">Abby</span>`
+        : `<span class="tag tag-adam">Adam</span>`;
+
+    return `<div class="task-card">
+      <div class="task-icon">${c.icon}</div>
       <div class="task-left">
         <div class="task-tags">
-          <span class="tag ${tm.cls}">${tm.label}</span>
+          <span class="tag ${c.cls}">${c.label}</span>
+          ${asgnTag}
         </div>
         <div class="task-name">${t.name}</div>
-        <div class="task-meta">💰 ${t.coins} 金幣 &nbsp;·&nbsp; 累計 ${count} 次</div>
+        <div class="task-meta">💰 ${t.coins} 金幣／次 · ${lim>0?'上限'+lim+'次':'無限次'}</div>
       </div>
-      <button class="delete-btn" onclick="deleteTask('${t.id}')">🗑</button>
-      ${done
-        ? `<button class="checkin-btn done-btn">✓ 完成</button>`
-        : `<button class="checkin-btn" onclick="checkin('${t.id}')">打卡</button>`
-      }
+      <div class="task-right">
+        <div class="count-row">
+          ${done>0 ? `<span class="count-badge">✓ ${done}次</span>` : ''}
+          ${lim>0  ? `<span class="limit-badge">/${lim}</span>` : ''}
+        </div>
+        <button class="checkin-btn ${maxed?'maxed':''}"
+          ${maxed?'disabled':`onclick="checkin('${t.id}')"`}>
+          ${maxed?'已達上限':'打卡＋'}
+        </button>
+      </div>
+      <button class="delete-btn" onclick="deleteTask('${t.id}')" title="刪除">✕</button>
     </div>`;
   }).join("");
 }
@@ -648,12 +438,15 @@ function renderRewards() {
       <div class="reward-emoji">${r.emoji}</div>
       <div class="reward-info">
         <div class="reward-name">${r.name}</div>
-        <div class="reward-cost">💰 需要 ${r.cost} 金幣 ${can ? '· 可兌換！' : ''}</div>
+        <div class="reward-cost">💰 ${r.cost} 金幣${can?' · ✨ 可兌換！':''}</div>
       </div>
-      <button class="delete-btn" onclick="deleteReward('${r.id}')">🗑</button>
-      <button class="redeem-btn" ${can?'':'disabled'} onclick="redeem('${r.id}','${r.name}',${r.cost})">
-        ${can ? '兌換' : '不足'}
-      </button>
+      <div class="reward-btns">
+        <button class="delete-btn" onclick="deleteReward('${r.id}')" title="刪除">✕</button>
+        <button class="redeem-btn" ${can?'':'disabled'}
+          onclick="redeem('${r.id}','${r.name}',${r.cost})">
+          ${can?'兌換':'不足'}
+        </button>
+      </div>
     </div>`;
   }).join("");
 }
@@ -661,15 +454,11 @@ function renderRewards() {
 function renderHistory() {
   const ps = state.players[curPlayer];
   const items = (ps.history||[]).slice().reverse().slice(0,30);
-  // Stats
-  document.getElementById("stat-total").textContent = ps.earned || 0;
-  const doneCount = Object.keys(ps.done).filter(k=>!k.includes("_count")).length;
-  document.getElementById("stat-tasks").textContent = doneCount;
+  const totalCheckins = Object.values(ps.counts||{}).reduce((a,b)=>a+b,0);
+  document.getElementById("stat-total").textContent = ps.earned||0;
+  document.getElementById("stat-tasks").textContent = totalCheckins;
   const el = document.getElementById("history-list");
-  if (!items.length) {
-    el.innerHTML = `<div class="empty-msg">還沒有紀錄喔！</div>`;
-    return;
-  }
+  if (!items.length) { el.innerHTML=`<div class="empty-msg">還沒有紀錄喔！</div>`; return; }
   el.innerHTML = items.map(h =>
     `<div class="history-item">
       <div>
@@ -681,24 +470,26 @@ function renderHistory() {
   ).join("");
 }
 
-// ============================================================
-// ACTIONS
-// ============================================================
+// ── ACTIONS ───────────────────────────────────────────────
 function checkin(tid) {
-  const ps = state.players[curPlayer];
+  const ps   = state.players[curPlayer];
   resetDailyIfNeeded(ps);
-  if (ps.done[tid]) return;
   const task = state.tasks.find(t=>t.id===tid);
   if (!task) return;
-  ps.done[tid] = true;
-  ps.done[tid+"_count"] = (ps.done[tid+"_count"]||0) + 1;
-  ps.coins += task.coins;
-  ps.earned = (ps.earned||0) + task.coins;
+  const done = ps.counts[tid]||0;
+  const lim  = task.limit||0;
+  if (lim>0 && done>=lim) return;
+
+  ps.counts[tid] = done + 1;
+  ps.coins  += task.coins;
+  ps.earned  = (ps.earned||0) + task.coins;
   ps.history = ps.history||[];
-  ps.history.push({ label:"完成："+task.name, delta:task.coins, time:timeStr() });
-  save();
-  renderAll();
-  showToast("+" + task.coins + " 💰  打卡成功！");
+  ps.history.push({
+    label: `完成：${task.name}（第${ps.counts[tid]}次）`,
+    delta: task.coins, time: timeStr()
+  });
+  persist(); renderAll();
+  showToast(`+${task.coins} 💰  打卡成功！`);
 }
 
 function redeem(rid, name, cost) {
@@ -707,76 +498,114 @@ function redeem(rid, name, cost) {
   ps.coins -= cost;
   ps.history = ps.history||[];
   ps.history.push({ label:"兌換："+name, delta:-cost, time:timeStr() });
-  save();
-  renderAll();
+  persist(); renderAll();
   showToast("🎉 兌換成功：" + name);
 }
 
 function deleteTask(tid) {
   if (!confirm("確定要刪除這個任務嗎？")) return;
   state.tasks = state.tasks.filter(t=>t.id!==tid);
-  save(); renderAll();
+  persist(); renderAll();
 }
 
 function deleteReward(rid) {
   if (!confirm("確定要刪除這個獎品嗎？")) return;
   state.rewards = state.rewards.filter(r=>r.id!==rid);
-  save(); renderRewards();
+  persist(); renderRewards();
 }
 
-function resetSystem() {
-  if (confirm("確定要清空所有紀錄嗎？這將會刪除所有玩家的金幣與歷史紀錄！")) {
-    localStorage.removeItem("kidreward_v3");
-    location.reload();
-  }
+// ── DEDUCT COINS ──────────────────────────────────────────
+function openDeduct() {
+  const ps = state.players[curPlayer];
+  document.getElementById("deduct-cur-coins").textContent = ps.coins + " 金幣";
+  document.getElementById("deduct-amount").value = "10";
+  document.getElementById("deduct-reason").value = "";
+  document.getElementById("deduct-overlay").classList.add("open");
 }
 
-// ============================================================
-// ADD TASK / REWARD
-// ============================================================
+function confirmDeduct() {
+  const ps     = state.players[curPlayer];
+  const amount = parseInt(document.getElementById("deduct-amount").value)||0;
+  const reason = document.getElementById("deduct-reason").value.trim();
+  if (amount <= 0) { alert("請輸入扣除金額"); return; }
+  if (amount > ps.coins) { alert(`金幣不足！目前只有 ${ps.coins} 金幣`); return; }
+  ps.coins -= amount;
+  ps.history = ps.history||[];
+  ps.history.push({
+    label: reason ? `家長扣除：${reason}` : "家長扣除金幣",
+    delta: -amount, time: timeStr()
+  });
+  persist(); closeOverlays(); renderAll();
+  showToast(`已扣除 ${amount} 💰`);
+}
+
+// ── RESET TODAY ───────────────────────────────────────────
+function openReset() {
+  document.getElementById("reset-player-name").textContent = PLAYERS[curPlayer].name;
+  document.getElementById("reset-overlay").classList.add("open");
+}
+
+function confirmReset() {
+  const ps = state.players[curPlayer];
+  ps.counts  = {};
+  ps.lastDay = today;
+  persist(); closeOverlays();
+  renderAll(); renderHistory();
+  showToast("今日打卡紀錄已重置");
+}
+
+// ── ADD TASK ──────────────────────────────────────────────
+function setAssign(val) {
+  newTaskAssign = val;
+  ["both","abby","adam"].forEach(k =>
+    document.getElementById("asgn-"+k).classList.toggle("sel", k===val));
+}
+
 function openAddTask() {
-  document.getElementById("new-task-name").value = "";
-  document.getElementById("new-task-coins").value = "10";
+  document.getElementById("nt-name").value  = "";
+  document.getElementById("nt-coins").value = "10";
+  document.getElementById("nt-limit").value = "0";
+  setAssign("both");
   document.getElementById("task-overlay").classList.add("open");
 }
 
+function saveNewTask() {
+  const name  = document.getElementById("nt-name").value.trim();
+  const cat   = document.getElementById("nt-cat").value;
+  const coins = parseInt(document.getElementById("nt-coins").value)||10;
+  const limit = Math.max(0, parseInt(document.getElementById("nt-limit").value)||0);
+  if (!name) { alert("請輸入任務名稱"); return; }
+  state.tasks.push({ id:"t"+Date.now(), name, cat, coins, limit, assignee:newTaskAssign });
+  persist(); closeOverlays(); renderTasks();
+  showToast("任務已新增！");
+}
+
+// ── ADD REWARD ────────────────────────────────────────────
 function openAddReward() {
-  document.getElementById("new-reward-name").value = "";
-  document.getElementById("new-reward-emoji").value = "";
-  document.getElementById("new-reward-cost").value = "50";
+  document.getElementById("nr-name").value  = "";
+  document.getElementById("nr-emoji").value = "";
+  document.getElementById("nr-cost").value  = "50";
   document.getElementById("reward-overlay").classList.add("open");
 }
 
+function saveNewReward() {
+  const name  = document.getElementById("nr-name").value.trim();
+  const emoji = document.getElementById("nr-emoji").value.trim()||"🎁";
+  const cost  = parseInt(document.getElementById("nr-cost").value)||50;
+  if (!name) { alert("請輸入獎品名稱"); return; }
+  state.rewards.push({ id:"r"+Date.now(), emoji, name, cost });
+  persist(); closeOverlays(); renderRewards();
+  showToast("獎品已新增！");
+}
+
+// ── UTILS ─────────────────────────────────────────────────
 function closeOverlays() {
   document.querySelectorAll(".admin-overlay").forEach(o=>o.classList.remove("open"));
 }
 
-function saveNewTask() {
-  const name = document.getElementById("new-task-name").value.trim();
-  const cat  = document.getElementById("new-task-cat").value;
-  const coins = parseInt(document.getElementById("new-task-coins").value) || 10;
-  if (!name) { alert("請輸入任務名稱"); return; }
-  state.tasks.push({ id:"t"+Date.now(), name, cat, coins });
-  save(); closeOverlays(); renderTasks();
-  showToast("任務已新增！");
-}
-
-function saveNewReward() {
-  const name  = document.getElementById("new-reward-name").value.trim();
-  const emoji = document.getElementById("new-reward-emoji").value.trim() || "🎁";
-  const cost  = parseInt(document.getElementById("new-reward-cost").value) || 50;
-  if (!name) { alert("請輸入獎品名稱"); return; }
-  state.rewards.push({ id:"r"+Date.now(), emoji, name, cost });
-  save(); closeOverlays(); renderRewards();
-  showToast("獎品已新增！");
-}
-
-// ============================================================
-// UTILS
-// ============================================================
 function timeStr() {
   const d = new Date();
-  return `${d.getMonth()+1}/${d.getDate()} ${d.getHours()}:${String(d.getMinutes()).padStart(2,'0')}`;
+  return `${d.getMonth()+1}/${d.getDate()} ${d.getHours()}:${String(d.getMinutes()).padStart(2,"0")}`;
 }
 
 function showToast(msg) {
@@ -786,14 +615,9 @@ function showToast(msg) {
   setTimeout(()=>t.classList.remove("show"), 2200);
 }
 
-// Close overlay when clicking outside panel
-document.querySelectorAll(".admin-overlay").forEach(o=>{
-  o.addEventListener("click", e=>{ if(e.target===o) closeOverlays(); });
-});
+document.querySelectorAll(".admin-overlay").forEach(o =>
+  o.addEventListener("click", e=>{ if(e.target===o) closeOverlays(); }));
 
-// ============================================================
-// INIT
-// ============================================================
 renderAll();
 </script>
 </body>
