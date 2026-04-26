@@ -81,9 +81,6 @@
   .redeem-btn:disabled{background:#f0f0f0;color:#aaa;cursor:default;}
 
   /* ── History page ── */
-  .hist-switcher{display:flex;gap:8px;margin-bottom:14px;}
-  .hist-btn{flex:1;padding:9px 6px;border-radius:50px;border:2px solid var(--border);background:var(--card);font-size:13px;font-weight:700;cursor:pointer;text-align:center;color:var(--muted);font-family:'Nunito',sans-serif;transition:all .2s;}
-  .hist-btn.active{background:var(--teal);color:white;border-color:var(--teal);}
 
   .stats-row{display:flex;gap:10px;margin-bottom:14px;}
   .stat-card{flex:1;background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:12px;text-align:center;}
@@ -192,10 +189,6 @@
   <div id="page-history" class="page">
 
     <!-- Inner switcher — independent from top switcher -->
-    <div class="hist-switcher">
-      <button class="hist-btn active" id="h0-btn" onclick="switchHist(0)">🥷 Abby</button>
-      <button class="hist-btn" id="h1-btn" onclick="switchHist(1)">⚔️ Adam</button>
-    </div>
 
     <!-- Stats -->
     <div class="stats-row">
@@ -349,8 +342,7 @@ const CAT = {
 // ── STATE ─────────────────────────────────────────────────
 // IMPORTANT: keep key "kidreward_v4" so existing phone data is preserved
 const TODAY = new Date().toDateString();
-let curPlayer  = 0;  // controls Tasks tab
-let histPlayer = 0;  // controls History tab independently
+let curPlayer = 0;
 let newTaskAssign  = "both";
 let deductTarget   = 0;
 
@@ -382,14 +374,10 @@ function switchPlayer(idx) {
   document.getElementById("p0-btn").classList.toggle("active", idx===0);
   document.getElementById("p1-btn").classList.toggle("active", idx===1);
   renderAll();
+  // If history tab is currently visible, refresh it too
+  if (document.getElementById("page-history").classList.contains("active")) renderHistory();
 }
 
-function switchHist(idx) {
-  histPlayer = idx;
-  document.getElementById("h0-btn").classList.toggle("active", idx===0);
-  document.getElementById("h1-btn").classList.toggle("active", idx===1);
-  renderHistory();
-}
 
 function showPage(name) {
   ["tasks","rewards","history"].forEach(p =>
@@ -495,7 +483,7 @@ function renderRewards() {
 }
 
 function renderHistory() {
-  const ps = state.players[histPlayer];
+  const ps = state.players[curPlayer];
   resetDailyIfNeeded(ps);
 
   // Stats
@@ -700,20 +688,18 @@ function confirmDeduct() {
 
 // ── RESET TODAY ───────────────────────────────────────────
 function openReset() {
-  document.getElementById("reset-player-name").textContent = PLAYERS[histPlayer].name;
+  document.getElementById("reset-player-name").textContent = PLAYERS[curPlayer].name;
   document.getElementById("reset-overlay").classList.add("open");
 }
 
 function confirmReset() {
-  const ps = state.players[histPlayer];
+  const ps = state.players[curPlayer];
   ps.counts  = {};
   ps.lastDay = TODAY;
   persist(); closeOverlays();
-  // Re-render both sections
-  if (histPlayer === curPlayer) renderAll();
-  else renderHistory();
+  renderAll();
   renderHistory();
-  showToast(`${PLAYERS[histPlayer].name} 今日打卡已重置`);
+  showToast(`${PLAYERS[curPlayer].name} 今日打卡已重置`);
 }
 
 // ── ADD TASK ──────────────────────────────────────────────
