@@ -18,6 +18,7 @@
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
   body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:90px;}
 
+  /* ── Top player switcher ── */
   .player-switcher{display:flex;gap:10px;padding:16px 16px 0;}
   .player-btn{flex:1;background:var(--card);border:2px solid var(--border);border-radius:14px;padding:10px 12px;cursor:pointer;transition:all .2s;text-align:center;}
   .player-btn.active{border-color:var(--teal);background:var(--teal-light);}
@@ -26,6 +27,7 @@
   .player-btn .p-coins{font-size:12px;color:var(--muted);margin-top:1px;}
   .player-btn.active .p-name{color:var(--teal-dark);}
 
+  /* ── Header ── */
   .header{margin:12px 16px 0;background:linear-gradient(135deg,var(--teal) 0%,var(--teal-dark) 100%);border-radius:22px;padding:18px 20px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;}
   .header::before{content:'';position:absolute;right:-20px;top:-20px;width:120px;height:120px;background:rgba(255,255,255,.08);border-radius:50%;}
   .header-avatar{font-size:42px;line-height:1;}
@@ -34,6 +36,7 @@
   .header-sub{font-size:12px;color:rgba(255,255,255,.75);margin-top:2px;}
   .coin-badge{background:var(--gold);border-radius:50px;padding:8px 16px;display:flex;align-items:center;gap:5px;font-weight:800;font-size:18px;color:var(--gold-dark);box-shadow:0 3px 10px rgba(245,197,24,.4);}
 
+  /* ── Tabs ── */
   .tabs{display:flex;gap:8px;padding:14px 16px 0;}
   .tab{flex:1;padding:10px 6px;border-radius:50px;border:2px solid var(--border);background:var(--card);font-size:13px;font-weight:700;cursor:pointer;text-align:center;color:var(--muted);font-family:'Nunito',sans-serif;transition:all .2s;}
   .tab.active{background:var(--teal);color:white;border-color:var(--teal);}
@@ -43,7 +46,7 @@
   .page.active{display:block;}
   .section-title{font-size:17px;font-weight:800;color:var(--text);margin-bottom:12px;}
 
-  /* Task cards */
+  /* ── Task cards ── */
   .task-card{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:10px;}
   .task-icon{font-size:26px;width:40px;text-align:center;flex-shrink:0;}
   .task-left{flex:1;min-width:0;}
@@ -61,12 +64,12 @@
   .task-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0;}
   .checkin-btn{background:var(--teal);color:white;border:none;border-radius:50px;padding:8px 16px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .15s;white-space:nowrap;}
   .checkin-btn:active{transform:scale(.93);}
+  .checkin-btn.maxed{background:#e8f5f4;color:var(--teal-dark);cursor:default;}
   .count-row{display:flex;align-items:center;gap:5px;}
   .count-badge{background:var(--teal-light);color:var(--teal-dark);font-size:12px;font-weight:800;border-radius:20px;padding:2px 10px;}
   .limit-badge{background:#f3f4f6;color:#6b7280;font-size:11px;font-weight:700;border-radius:20px;padding:2px 8px;}
-  .checkin-btn.maxed{background:#e8f5f4;color:var(--teal-dark);cursor:default;}
 
-  /* Reward cards */
+  /* ── Reward cards ── */
   .reward-card{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:12px;}
   .reward-emoji{font-size:32px;width:48px;text-align:center;flex-shrink:0;}
   .reward-info{flex:1;}
@@ -77,7 +80,22 @@
   .redeem-btn:active{transform:scale(.93);}
   .redeem-btn:disabled{background:#f0f0f0;color:#aaa;cursor:default;}
 
-  /* History */
+  /* ── History page ── */
+  .hist-switcher{display:flex;gap:8px;margin-bottom:14px;}
+  .hist-btn{flex:1;padding:9px 6px;border-radius:50px;border:2px solid var(--border);background:var(--card);font-size:13px;font-weight:700;cursor:pointer;text-align:center;color:var(--muted);font-family:'Nunito',sans-serif;transition:all .2s;}
+  .hist-btn.active{background:var(--teal);color:white;border-color:var(--teal);}
+
+  .stats-row{display:flex;gap:10px;margin-bottom:14px;}
+  .stat-card{flex:1;background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:12px;text-align:center;}
+  .stat-val{font-size:22px;font-weight:800;color:var(--teal-dark);}
+  .stat-label{font-size:11px;color:var(--muted);margin-top:2px;}
+
+  /* ── Line chart ── */
+  .chart-card{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px 14px 12px;margin-bottom:14px;}
+  .chart-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:10px;}
+  .chart-wrap{width:100%;overflow:hidden;}
+  .chart-wrap svg{width:100%;height:140px;display:block;}
+
   .history-item{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;}
   .history-label{font-size:14px;color:var(--text);}
   .history-time{font-size:11px;color:var(--muted);margin-top:2px;}
@@ -85,29 +103,18 @@
   .delta-pos{color:var(--teal-dark);}
   .delta-neg{color:#e55;}
 
-  .stats-row{display:flex;gap:10px;margin-bottom:16px;}
-  .stat-card{flex:1;background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:12px;text-align:center;}
-  .stat-val{font-size:22px;font-weight:800;color:var(--teal-dark);}
-  .stat-label{font-size:11px;color:var(--muted);margin-top:2px;}
-
-  /* Reset button */
-  .reset-btn{width:100%;padding:12px;background:#fff5f5;color:#c53030;border:2px solid #fed7d7;border-radius:var(--radius);font-size:14px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;margin-top:8px;}
-
-  /* Add button */
+  /* ── Buttons ── */
+  .reset-btn{width:100%;padding:12px;background:#fff5f5;color:#c53030;border:2px solid #fed7d7;border-radius:var(--radius);font-size:14px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;margin-bottom:14px;}
   .add-btn{width:100%;padding:12px;background:var(--teal-light);color:var(--teal-dark);border:2px dashed var(--teal);border-radius:var(--radius);font-size:14px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;margin-bottom:14px;margin-top:4px;}
-
-  /* Deduct button */
   .deduct-section{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
   .deduct-info .deduct-title{font-size:15px;font-weight:700;color:var(--text);}
   .deduct-info .deduct-sub{font-size:12px;color:var(--muted);margin-top:2px;}
-  .deduct-btn{background:#fff5f5;color:#c53030;border:2px solid #fed7d7;border-radius:50px;padding:9px 16px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;white-space:nowrap;transition:all .15s;flex-shrink:0;}
-  .deduct-btn:active{transform:scale(.93);}
-
+  .deduct-btn{background:#fff5f5;color:#c53030;border:2px solid #fed7d7;border-radius:50px;padding:9px 16px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;white-space:nowrap;flex-shrink:0;}
   .delete-btn{background:none;border:none;color:#ccc;font-size:15px;cursor:pointer;padding:4px 2px;flex-shrink:0;}
   .delete-btn:hover{color:#e55;}
   .empty-msg{color:var(--muted);font-size:14px;padding:20px 0;text-align:center;}
 
-  /* Overlays */
+  /* ── Overlays ── */
   .admin-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;align-items:flex-end;justify-content:center;}
   .admin-overlay.open{display:flex;}
   .admin-panel{background:var(--card);border-radius:28px 28px 0 0;padding:24px 20px 44px;width:100%;max-width:480px;max-height:85vh;overflow-y:auto;}
@@ -129,6 +136,7 @@
 </head>
 <body>
 
+<!-- Top player switcher (controls Tasks tab) -->
 <div class="player-switcher">
   <div class="player-btn active" id="p0-btn" onclick="switchPlayer(0)">
     <div class="p-avatar">🥷</div>
@@ -154,20 +162,20 @@
 <div class="tabs">
   <button class="tab active" onclick="showPage('tasks')">📋 每日任務</button>
   <button class="tab" onclick="showPage('rewards')">🎁 獎品兌換</button>
-  <button class="tab" onclick="showPage('history')">📜 紀錄</button>
+  <button class="tab" onclick="showPage('history')">📜 歷史紀錄</button>
 </div>
 
 <div class="content">
-  <!-- Tasks page -->
+
+  <!-- ── Tasks page ── -->
   <div id="page-tasks" class="page active">
     <div class="section-title">📋 今日任務</div>
     <div id="task-list"></div>
     <button class="add-btn" onclick="openAddTask()">＋ 新增任務</button>
   </div>
 
-  <!-- Rewards page -->
+  <!-- ── Rewards page (shared) ── -->
   <div id="page-rewards" class="page">
-    <!-- Deduct coins section -->
     <div class="deduct-section">
       <div class="deduct-info">
         <div class="deduct-title">🔒 家長扣除金幣</div>
@@ -180,19 +188,39 @@
     <button class="add-btn" onclick="openAddReward()">＋ 新增獎品</button>
   </div>
 
-  <!-- History page -->
+  <!-- ── History page (own player switcher) ── -->
   <div id="page-history" class="page">
+
+    <!-- Inner switcher — independent from top switcher -->
+    <div class="hist-switcher">
+      <button class="hist-btn active" id="h0-btn" onclick="switchHist(0)">🥷 Abby</button>
+      <button class="hist-btn" id="h1-btn" onclick="switchHist(1)">⚔️ Adam</button>
+    </div>
+
+    <!-- Stats -->
     <div class="stats-row">
       <div class="stat-card"><div class="stat-val" id="stat-total">0</div><div class="stat-label">累計金幣</div></div>
       <div class="stat-card"><div class="stat-val" id="stat-tasks">0</div><div class="stat-label">今日打卡次數</div></div>
     </div>
+
+    <!-- 2-week line chart -->
+    <div class="chart-card">
+      <div class="chart-title">📈 近兩週每日金幣變化</div>
+      <div class="chart-wrap">
+        <svg id="coin-chart" viewBox="0 0 340 140" preserveAspectRatio="xMidYMid meet"></svg>
+      </div>
+    </div>
+
+    <!-- Reset button above list -->
     <button class="reset-btn" onclick="openReset()">🔄 重置今日打卡紀錄</button>
-    <div class="section-title" style="margin-top:14px;">📜 歷史紀錄</div>
+
+    <div class="section-title">📜 歷史紀錄</div>
     <div id="history-list"></div>
   </div>
+
 </div>
 
-<!-- Add Task Panel -->
+<!-- ── Add Task Panel ── -->
 <div class="admin-overlay" id="task-overlay">
   <div class="admin-panel">
     <div class="admin-title">➕ 新增任務</div>
@@ -231,7 +259,7 @@
   </div>
 </div>
 
-<!-- Add Reward Panel -->
+<!-- ── Add Reward Panel ── -->
 <div class="admin-overlay" id="reward-overlay">
   <div class="admin-panel">
     <div class="admin-title">➕ 新增獎品</div>
@@ -252,12 +280,16 @@
   </div>
 </div>
 
-<!-- Deduct Coins Panel -->
+<!-- ── Deduct Coins Panel ── -->
 <div class="admin-overlay" id="deduct-overlay">
   <div class="admin-panel">
     <div class="admin-title">🔒 家長扣除金幣</div>
     <div class="admin-row">
-      <label>目前金幣：<span id="deduct-cur-coins" style="color:var(--teal-dark);font-weight:800;"></span></label>
+      <label>扣除對象</label>
+      <div class="assignee-row">
+        <button class="assignee-btn sel" id="dq-abby" onclick="setDeductTarget(0)">🥷 Abby (<span id="dq-abby-coins">0</span>)</button>
+        <button class="assignee-btn" id="dq-adam" onclick="setDeductTarget(1)">⚔️ Adam (<span id="dq-adam-coins">0</span>)</button>
+      </div>
     </div>
     <div class="admin-row">
       <label>扣除金幣數量</label>
@@ -272,7 +304,7 @@
   </div>
 </div>
 
-<!-- Reset Confirmation Panel -->
+<!-- ── Reset Confirmation Panel ── -->
 <div class="admin-overlay" id="reset-overlay">
   <div class="admin-panel">
     <div class="admin-title">🔄 重置今日打卡</div>
@@ -288,6 +320,7 @@
 
 <script>
 // ── DEFAULT DATA ──────────────────────────────────────────
+// Modify these arrays to change the initial tasks/rewards
 const DEFAULT_TASKS = [
   { id:"t1", name:"練習鋼琴20分鐘", cat:"study", coins:10, limit:1, assignee:"abby" },
   { id:"t2", name:"練習鋼琴30分鐘", cat:"study", coins:20, limit:1, assignee:"abby" },
@@ -314,9 +347,12 @@ const CAT = {
 };
 
 // ── STATE ─────────────────────────────────────────────────
-const today = new Date().toDateString();
-let curPlayer = 0;
-let newTaskAssign = "both";
+// IMPORTANT: keep key "kidreward_v4" so existing phone data is preserved
+const TODAY = new Date().toDateString();
+let curPlayer  = 0;  // controls Tasks tab
+let histPlayer = 0;  // controls History tab independently
+let newTaskAssign  = "both";
+let deductTarget   = 0;
 
 function loadState() {
   try {
@@ -337,7 +373,7 @@ while (state.players.length < PLAYERS.length)
   state.players.push({ coins:0, earned:0, counts:{}, lastDay:"", history:[] });
 
 function resetDailyIfNeeded(ps) {
-  if (ps.lastDay !== today) { ps.counts = {}; ps.lastDay = today; }
+  if (ps.lastDay !== TODAY) { ps.counts = {}; ps.lastDay = TODAY; }
 }
 
 // ── NAVIGATION ────────────────────────────────────────────
@@ -348,12 +384,19 @@ function switchPlayer(idx) {
   renderAll();
 }
 
+function switchHist(idx) {
+  histPlayer = idx;
+  document.getElementById("h0-btn").classList.toggle("active", idx===0);
+  document.getElementById("h1-btn").classList.toggle("active", idx===1);
+  renderHistory();
+}
+
 function showPage(name) {
   ["tasks","rewards","history"].forEach(p =>
     document.getElementById("page-"+p).classList.toggle("active", p===name));
   document.querySelectorAll(".tab").forEach((t,i) =>
     t.classList.toggle("active", ["tasks","rewards","history"][i]===name));
-  if (name==="history") renderHistory();
+  if (name === "history") renderHistory();
 }
 
 // ── RENDER ────────────────────────────────────────────────
@@ -452,11 +495,19 @@ function renderRewards() {
 }
 
 function renderHistory() {
-  const ps = state.players[curPlayer];
-  const items = (ps.history||[]).slice().reverse().slice(0,30);
+  const ps = state.players[histPlayer];
+  resetDailyIfNeeded(ps);
+
+  // Stats
   const totalCheckins = Object.values(ps.counts||{}).reduce((a,b)=>a+b,0);
   document.getElementById("stat-total").textContent = ps.earned||0;
   document.getElementById("stat-tasks").textContent = totalCheckins;
+
+  // Draw chart
+  drawChart(ps);
+
+  // History list
+  const items = (ps.history||[]).slice().reverse().slice(0,30);
   const el = document.getElementById("history-list");
   if (!items.length) { el.innerHTML=`<div class="empty-msg">還沒有紀錄喔！</div>`; return; }
   el.innerHTML = items.map(h =>
@@ -468,6 +519,105 @@ function renderHistory() {
       <div class="history-delta ${h.delta>0?'delta-pos':'delta-neg'}">${h.delta>0?'+':''}${h.delta} 💰</div>
     </div>`
   ).join("");
+}
+
+// ── LINE CHART ────────────────────────────────────────────
+function getLast14DayLabels() {
+  // Returns array of "M/D" strings for past 14 days (oldest first)
+  const days = [];
+  for (let i = 13; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    days.push(`${d.getMonth()+1}/${d.getDate()}`);
+  }
+  return days;
+}
+
+function buildChartData(ps) {
+  const labels = getLast14DayLabels();
+  // Sum net delta per day from history
+  const netByDay = {};
+  labels.forEach(l => netByDay[l] = 0);
+  (ps.history||[]).forEach(h => {
+    if (!h.time) return;
+    const datepart = h.time.split(' ')[0]; // e.g. "4/26"
+    if (datepart in netByDay) netByDay[datepart] += h.delta;
+  });
+  return labels.map(l => ({ label: l, val: netByDay[l] }));
+}
+
+function drawChart(ps) {
+  const data  = buildChartData(ps);
+  const svg   = document.getElementById("coin-chart");
+  const W = 340, H = 140;
+  const padL = 32, padR = 10, padT = 16, padB = 28;
+  const chartW = W - padL - padR;
+  const chartH = H - padT - padB;
+
+  const vals = data.map(d => d.val);
+  const maxV = Math.max(...vals, 1);
+  const minV = Math.min(...vals, 0);
+  const range = maxV - minV || 1;
+
+  // Helper: map value to Y coordinate
+  const toY = v => padT + chartH - ((v - minV) / range) * chartH;
+  // Helper: map index to X coordinate
+  const toX = i => padL + (i / (data.length - 1)) * chartW;
+
+  // Build polyline points
+  const pts = data.map((d,i) => `${toX(i).toFixed(1)},${toY(d.val).toFixed(1)}`).join(' ');
+
+  // Zero line Y
+  const zeroY = toY(0).toFixed(1);
+
+  // Tick labels: show every other label to avoid crowding
+  const tickLabels = data.map((d,i) => {
+    if (i % 2 !== 0) return '';
+    return `<text x="${toX(i).toFixed(1)}" y="${H - 6}" text-anchor="middle"
+      font-size="9" fill="#7a9e9b" font-family="Nunito,sans-serif">${d.label}</text>`;
+  }).join('');
+
+  // Dot circles
+  const dots = data.map((d,i) => {
+    const cx = toX(i).toFixed(1);
+    const cy = toY(d.val).toFixed(1);
+    const color = d.val >= 0 ? '#2ec4b6' : '#e55';
+    return `<circle cx="${cx}" cy="${cy}" r="3.5" fill="${color}" stroke="white" stroke-width="1.5"/>`;
+  }).join('');
+
+  // Value labels on dots (show only non-zero)
+  const valLabels = data.map((d,i) => {
+    if (d.val === 0) return '';
+    const cx = toX(i).toFixed(1);
+    const cy = (toY(d.val) - 8).toFixed(1);
+    const color = d.val >= 0 ? '#1a9e92' : '#c53030';
+    return `<text x="${cx}" y="${cy}" text-anchor="middle"
+      font-size="9" font-weight="800" fill="${color}" font-family="Nunito,sans-serif">${d.val>0?'+':''}${d.val}</text>`;
+  }).join('');
+
+  svg.innerHTML = `
+    <!-- Grid line at zero -->
+    <line x1="${padL}" y1="${zeroY}" x2="${W-padR}" y2="${zeroY}"
+      stroke="#d4eeeb" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+    <!-- Filled area under line -->
+    <defs>
+      <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2ec4b6" stop-opacity="0.18"/>
+        <stop offset="100%" stop-color="#2ec4b6" stop-opacity="0.02"/>
+      </linearGradient>
+    </defs>
+    <polygon points="${pts} ${toX(data.length-1).toFixed(1)},${zeroY} ${toX(0).toFixed(1)},${zeroY}"
+      fill="url(#areaGrad)"/>
+
+    <!-- Line -->
+    <polyline points="${pts}"
+      fill="none" stroke="#2ec4b6" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+
+    ${dots}
+    ${valLabels}
+    ${tickLabels}
+  `;
 }
 
 // ── ACTIONS ───────────────────────────────────────────────
@@ -515,20 +665,29 @@ function deleteReward(rid) {
 }
 
 // ── DEDUCT COINS ──────────────────────────────────────────
+function setDeductTarget(idx) {
+  deductTarget = idx;
+  document.getElementById("dq-abby").classList.toggle("sel", idx===0);
+  document.getElementById("dq-adam").classList.toggle("sel", idx===1);
+}
+
 function openDeduct() {
-  const ps = state.players[curPlayer];
-  document.getElementById("deduct-cur-coins").textContent = ps.coins + " 金幣";
+  // Show current coins for both players in the panel
+  document.getElementById("dq-abby-coins").textContent = state.players[0].coins;
+  document.getElementById("dq-adam-coins").textContent = state.players[1].coins;
+  deductTarget = curPlayer;
+  setDeductTarget(curPlayer);
   document.getElementById("deduct-amount").value = "10";
   document.getElementById("deduct-reason").value = "";
   document.getElementById("deduct-overlay").classList.add("open");
 }
 
 function confirmDeduct() {
-  const ps     = state.players[curPlayer];
+  const ps     = state.players[deductTarget];
   const amount = parseInt(document.getElementById("deduct-amount").value)||0;
   const reason = document.getElementById("deduct-reason").value.trim();
   if (amount <= 0) { alert("請輸入扣除金額"); return; }
-  if (amount > ps.coins) { alert(`金幣不足！目前只有 ${ps.coins} 金幣`); return; }
+  if (amount > ps.coins) { alert(`${PLAYERS[deductTarget].name} 金幣不足！目前只有 ${ps.coins} 金幣`); return; }
   ps.coins -= amount;
   ps.history = ps.history||[];
   ps.history.push({
@@ -536,22 +695,25 @@ function confirmDeduct() {
     delta: -amount, time: timeStr()
   });
   persist(); closeOverlays(); renderAll();
-  showToast(`已扣除 ${amount} 💰`);
+  showToast(`${PLAYERS[deductTarget].name} 已扣除 ${amount} 💰`);
 }
 
 // ── RESET TODAY ───────────────────────────────────────────
 function openReset() {
-  document.getElementById("reset-player-name").textContent = PLAYERS[curPlayer].name;
+  document.getElementById("reset-player-name").textContent = PLAYERS[histPlayer].name;
   document.getElementById("reset-overlay").classList.add("open");
 }
 
 function confirmReset() {
-  const ps = state.players[curPlayer];
+  const ps = state.players[histPlayer];
   ps.counts  = {};
-  ps.lastDay = today;
+  ps.lastDay = TODAY;
   persist(); closeOverlays();
-  renderAll(); renderHistory();
-  showToast("今日打卡紀錄已重置");
+  // Re-render both sections
+  if (histPlayer === curPlayer) renderAll();
+  else renderHistory();
+  renderHistory();
+  showToast(`${PLAYERS[histPlayer].name} 今日打卡已重置`);
 }
 
 // ── ADD TASK ──────────────────────────────────────────────
