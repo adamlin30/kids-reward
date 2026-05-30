@@ -12,13 +12,14 @@
   :root {
     --teal:#2ec4b6; --teal-dark:#1a9e92; --teal-light:#e0f7f5;
     --gold:#f5c518; --gold-dark:#c9a000;
+    --purple:#8b5cf6; --purple-light:#ede9fe;
     --bg:#f0faf9; --card:#ffffff; --text:#1a2e2d; --muted:#7a9e9b; --border:#d4eeeb;
     --radius:18px; --radius-sm:10px;
   }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
   body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:90px;}
 
-  /* ── Top player switcher ── */
+  /* ── Player switcher ── */
   .player-switcher{display:flex;gap:10px;padding:16px 16px 0;}
   .player-btn{flex:1;background:var(--card);border:2px solid var(--border);border-radius:14px;padding:10px 12px;cursor:pointer;transition:all .2s;text-align:center;}
   .player-btn.active{border-color:var(--teal);background:var(--teal-light);}
@@ -37,8 +38,8 @@
   .coin-badge{background:var(--gold);border-radius:50px;padding:8px 16px;display:flex;align-items:center;gap:5px;font-weight:800;font-size:18px;color:var(--gold-dark);box-shadow:0 3px 10px rgba(245,197,24,.4);}
 
   /* ── Tabs ── */
-  .tabs{display:flex;gap:8px;padding:14px 16px 0;}
-  .tab{flex:1;padding:10px 6px;border-radius:50px;border:2px solid var(--border);background:var(--card);font-size:13px;font-weight:700;cursor:pointer;text-align:center;color:var(--muted);font-family:'Nunito',sans-serif;transition:all .2s;}
+  .tabs{display:flex;gap:6px;padding:14px 16px 0;}
+  .tab{flex:1;padding:9px 4px;border-radius:50px;border:2px solid var(--border);background:var(--card);font-size:12px;font-weight:700;cursor:pointer;text-align:center;color:var(--muted);font-family:'Nunito',sans-serif;transition:all .2s;}
   .tab.active{background:var(--teal);color:white;border-color:var(--teal);}
 
   .content{padding:14px 16px 0;}
@@ -48,6 +49,7 @@
 
   /* ── Task cards ── */
   .task-card{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+  .task-card.inactive{opacity:.4;}
   .task-icon{font-size:26px;width:40px;text-align:center;flex-shrink:0;}
   .task-left{flex:1;min-width:0;}
   .task-tags{display:flex;gap:5px;margin-bottom:5px;flex-wrap:wrap;}
@@ -69,6 +71,17 @@
   .count-badge{background:var(--teal-light);color:var(--teal-dark);font-size:12px;font-weight:800;border-radius:20px;padding:2px 10px;}
   .limit-badge{background:#f3f4f6;color:#6b7280;font-size:11px;font-weight:700;border-radius:20px;padding:2px 8px;}
 
+  /* ── Weekly challenge ── */
+  .challenge-card{background:linear-gradient(135deg,var(--purple) 0%,#6d28d9 100%);border-radius:var(--radius);padding:16px;margin-bottom:14px;color:white;position:relative;overflow:hidden;}
+  .challenge-card::before{content:'🎯';position:absolute;right:12px;top:10px;font-size:36px;opacity:.3;}
+  .challenge-label{font-size:11px;font-weight:700;opacity:.8;letter-spacing:.5px;text-transform:uppercase;}
+  .challenge-name{font-size:17px;font-weight:800;margin:4px 0 6px;}
+  .challenge-progress-bar{background:rgba(255,255,255,.25);border-radius:10px;height:8px;overflow:hidden;}
+  .challenge-progress-fill{background:white;height:100%;border-radius:10px;transition:width .4s;}
+  .challenge-meta{font-size:12px;opacity:.8;margin-top:6px;display:flex;justify-content:space-between;}
+  .challenge-edit-btn{background:rgba(255,255,255,.2);border:none;color:white;border-radius:20px;padding:4px 10px;font-size:11px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;margin-top:8px;}
+  .challenge-done-badge{background:var(--gold);color:var(--gold-dark);border-radius:20px;padding:3px 12px;font-size:12px;font-weight:800;display:inline-block;margin-top:6px;}
+
   /* ── Reward cards ── */
   .reward-card{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:12px;}
   .reward-emoji{font-size:32px;width:48px;text-align:center;flex-shrink:0;}
@@ -80,19 +93,14 @@
   .redeem-btn:active{transform:scale(.93);}
   .redeem-btn:disabled{background:#f0f0f0;color:#aaa;cursor:default;}
 
-  /* ── History page ── */
-
+  /* ── History ── */
   .stats-row{display:flex;gap:10px;margin-bottom:14px;}
   .stat-card{flex:1;background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:12px;text-align:center;}
   .stat-val{font-size:22px;font-weight:800;color:var(--teal-dark);}
   .stat-label{font-size:11px;color:var(--muted);margin-top:2px;}
-
-  /* ── Line chart ── */
   .chart-card{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px 14px 12px;margin-bottom:14px;}
   .chart-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:10px;}
-  .chart-wrap{width:100%;overflow:hidden;}
   .chart-wrap svg{width:100%;height:140px;display:block;}
-
   .history-item{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;}
   .history-label{font-size:14px;color:var(--text);}
   .history-time{font-size:11px;color:var(--muted);margin-top:2px;}
@@ -100,9 +108,19 @@
   .delta-pos{color:var(--teal-dark);}
   .delta-neg{color:#e55;}
 
+  /* ── Weekly report ── */
+  .report-card{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:10px;}
+  .report-week{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:8px;}
+  .report-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:.5px solid var(--border);}
+  .report-row:last-child{border-bottom:none;}
+  .report-player{font-size:14px;font-weight:700;}
+  .report-nums{display:flex;gap:14px;font-size:13px;color:var(--muted);}
+  .report-nums span{font-weight:700;color:var(--teal-dark);}
+
   /* ── Buttons ── */
   .reset-btn{width:100%;padding:12px;background:#fff5f5;color:#c53030;border:2px solid #fed7d7;border-radius:var(--radius);font-size:14px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;margin-bottom:14px;}
   .add-btn{width:100%;padding:12px;background:var(--teal-light);color:var(--teal-dark);border:2px dashed var(--teal);border-radius:var(--radius);font-size:14px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;margin-bottom:14px;margin-top:4px;}
+  .outline-btn{width:100%;padding:12px;background:var(--card);color:var(--muted);border:2px solid var(--border);border-radius:var(--radius);font-size:14px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;margin-bottom:10px;}
   .deduct-section{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
   .deduct-info .deduct-title{font-size:15px;font-weight:700;color:var(--text);}
   .deduct-info .deduct-sub{font-size:12px;color:var(--muted);margin-top:2px;}
@@ -111,14 +129,22 @@
   .delete-btn:hover{color:#e55;}
   .empty-msg{color:var(--muted);font-size:14px;padding:20px 0;text-align:center;}
 
+  /* ── Day pills ── */
+  .day-pills{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px;}
+  .day-pill{font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);color:var(--muted);cursor:pointer;font-family:'Nunito',sans-serif;}
+  .day-pill.on{background:var(--teal);color:white;border-color:var(--teal);}
+  .day-pills-display{display:flex;gap:4px;flex-wrap:wrap;margin-top:3px;}
+  .day-tag{font-size:10px;font-weight:700;padding:1px 7px;border-radius:20px;background:var(--teal-light);color:var(--teal-dark);}
+
   /* ── Overlays ── */
   .admin-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;align-items:flex-end;justify-content:center;}
   .admin-overlay.open{display:flex;}
-  .admin-panel{background:var(--card);border-radius:28px 28px 0 0;padding:24px 20px 44px;width:100%;max-width:480px;max-height:85vh;overflow-y:auto;}
+  .admin-panel{background:var(--card);border-radius:28px 28px 0 0;padding:24px 20px 44px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;}
   .admin-title{font-size:18px;font-weight:800;margin-bottom:16px;}
   .admin-row{margin-bottom:14px;}
   .admin-row label{font-size:13px;font-weight:700;color:var(--muted);display:block;margin-bottom:5px;}
-  .admin-row input,.admin-row select{width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:14px;font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);}
+  .admin-row input,.admin-row select,.admin-row textarea{width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:14px;font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);}
+  .admin-row textarea{min-height:80px;resize:vertical;}
   .admin-row .hint{font-size:11px;color:var(--muted);margin-top:4px;}
   .assignee-row{display:flex;gap:8px;}
   .assignee-btn{flex:1;padding:10px 4px;border:2px solid var(--border);border-radius:var(--radius-sm);background:var(--card);font-size:12px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;text-align:center;color:var(--muted);transition:all .15s;}
@@ -133,7 +159,6 @@
 </head>
 <body>
 
-<!-- Top player switcher (controls Tasks tab) -->
 <div class="player-switcher">
   <div class="player-btn active" id="p0-btn" onclick="switchPlayer(0)">
     <div class="p-avatar">🥷</div>
@@ -157,26 +182,29 @@
 </div>
 
 <div class="tabs">
-  <button class="tab active" onclick="showPage('tasks')">📋 每日任務</button>
-  <button class="tab" onclick="showPage('rewards')">🎁 獎品兌換</button>
-  <button class="tab" onclick="showPage('history')">📜 歷史紀錄</button>
+  <button class="tab active" onclick="showPage('tasks')">📋 任務</button>
+  <button class="tab" onclick="showPage('rewards')">🎁 獎品</button>
+  <button class="tab" onclick="showPage('history')">📜 紀錄</button>
+  <button class="tab" onclick="showPage('report')">📊 週報</button>
 </div>
 
 <div class="content">
 
   <!-- ── Tasks page ── -->
   <div id="page-tasks" class="page active">
+    <!-- Weekly challenge -->
+    <div id="challenge-area"></div>
     <div class="section-title">📋 今日任務</div>
     <div id="task-list"></div>
     <button class="add-btn" onclick="openAddTask()">＋ 新增任務</button>
   </div>
 
-  <!-- ── Rewards page (shared) ── -->
+  <!-- ── Rewards page ── -->
   <div id="page-rewards" class="page">
     <div class="deduct-section">
       <div class="deduct-info">
         <div class="deduct-title">🔒 家長扣除金幣</div>
-        <div class="deduct-sub">手動扣除指定金額（懲罰或調整用）</div>
+        <div class="deduct-sub">手動扣除指定金額</div>
       </div>
       <button class="deduct-btn" onclick="openDeduct()">扣除金幣</button>
     </div>
@@ -185,30 +213,35 @@
     <button class="add-btn" onclick="openAddReward()">＋ 新增獎品</button>
   </div>
 
-  <!-- ── History page (own player switcher) ── -->
+  <!-- ── History page ── -->
   <div id="page-history" class="page">
-
-    <!-- Inner switcher — independent from top switcher -->
-
-    <!-- Stats -->
     <div class="stats-row">
       <div class="stat-card"><div class="stat-val" id="stat-total">0</div><div class="stat-label">累計金幣</div></div>
       <div class="stat-card"><div class="stat-val" id="stat-tasks">0</div><div class="stat-label">今日打卡次數</div></div>
     </div>
-
-    <!-- 2-week line chart -->
     <div class="chart-card">
       <div class="chart-title">📈 近兩週每日金幣變化</div>
       <div class="chart-wrap">
         <svg id="coin-chart" viewBox="0 0 340 140" preserveAspectRatio="xMidYMid meet"></svg>
       </div>
     </div>
-
-    <!-- Reset button above list -->
     <button class="reset-btn" onclick="openReset()">🔄 重置今日打卡紀錄</button>
-
     <div class="section-title">📜 歷史紀錄</div>
     <div id="history-list"></div>
+  </div>
+
+  <!-- ── Weekly report page ── -->
+  <div id="page-report" class="page">
+    <div class="section-title">📊 每週報告</div>
+    <div id="report-list"></div>
+    <div style="display:flex;gap:10px;margin-top:4px;">
+      <button class="outline-btn" onclick="generateReport()" style="flex:1;">🔄 立即產生本週報告</button>
+      <button class="outline-btn" onclick="exportBackup()" style="flex:1;">💾 備份資料</button>
+    </div>
+    <div style="margin-top:4px;">
+      <button class="outline-btn" onclick="document.getElementById('import-file').click()">📂 從備份還原</button>
+      <input type="file" id="import-file" accept=".json" style="display:none" onchange="importBackup(event)"/>
+    </div>
   </div>
 
 </div>
@@ -237,7 +270,20 @@
     <div class="admin-row">
       <label>每日打卡上限次數（0 = 不限制）</label>
       <input type="number" id="nt-limit" value="0" min="0" />
-      <div class="hint">填 0 代表無限次，每次打卡都給金幣</div>
+      <div class="hint">填 0 代表無限次</div>
+    </div>
+    <div class="admin-row">
+      <label>出現的星期（不選 = 每天都出現）</label>
+      <div class="day-pills" id="nt-days">
+        <button class="day-pill" data-d="0">日</button>
+        <button class="day-pill" data-d="1">一</button>
+        <button class="day-pill" data-d="2">二</button>
+        <button class="day-pill" data-d="3">三</button>
+        <button class="day-pill" data-d="4">四</button>
+        <button class="day-pill" data-d="5">五</button>
+        <button class="day-pill" data-d="6">六</button>
+      </div>
+      <div class="hint">例：只選一三五，代表只在週一三五出現</div>
     </div>
     <div class="admin-row">
       <label>指派給誰</label>
@@ -309,29 +355,67 @@
   </div>
 </div>
 
+<!-- ── Weekly Challenge Panel ── -->
+<div class="admin-overlay" id="challenge-overlay">
+  <div class="admin-panel">
+    <div class="admin-title">🎯 設定每週挑戰</div>
+    <div class="admin-row">
+      <label>挑戰名稱</label>
+      <input type="text" id="wc-name" placeholder="例：本週運動滿5次" />
+    </div>
+    <div class="admin-row">
+      <label>目標次數</label>
+      <input type="number" id="wc-target" value="5" min="1" />
+    </div>
+    <div class="admin-row">
+      <label>完成獎勵金幣</label>
+      <input type="number" id="wc-bonus" value="50" min="1" />
+    </div>
+    <div class="admin-row">
+      <label>追蹤哪個任務（不選 = 任何任務都計入）</label>
+      <select id="wc-task">
+        <option value="">── 任何任務都計入 ──</option>
+      </select>
+      <div class="hint">例如選「運動1小時」，只有打卡這個任務才累積挑戰進度</div>
+    </div>
+    <div class="admin-row">
+      <label>指派給誰</label>
+      <div class="assignee-row">
+        <button class="assignee-btn sel" id="wc-asgn-both" onclick="setWcAssign('both')">🥷⚔️ 兩人共用</button>
+        <button class="assignee-btn" id="wc-asgn-abby" onclick="setWcAssign('abby')">🥷 Abby</button>
+        <button class="assignee-btn" id="wc-asgn-adam" onclick="setWcAssign('adam')">⚔️ Adam</button>
+      </div>
+    </div>
+    <button class="admin-save" onclick="saveChallenge()">儲存挑戰</button>
+    <button class="admin-save danger" style="margin-top:8px;" onclick="clearChallenge()">刪除本週挑戰</button>
+    <button class="admin-cancel" onclick="closeOverlays()">取消</button>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
-// ── DEFAULT DATA ──────────────────────────────────────────
-// Modify these arrays to change the initial tasks/rewards
-const DEFAULT_TASKS = [
-  { id:"t1", name:"練習鋼琴20分鐘", cat:"study", coins:10, limit:1, assignee:"abby" },
-  { id:"t2", name:"練習鋼琴30分鐘", cat:"study", coins:20, limit:1, assignee:"abby" },
-  { id:"t3", name:"練習鋼琴40分鐘", cat:"study", coins:40, limit:1, assignee:"abby" },
-  { id:"t4", name:"運動1小時",       cat:"sport", coins:30, limit:1, assignee:"both" },
-  { id:"t5", name:"寫評量1回",       cat:"study", coins:10, limit:0, assignee:"both" },
-  { id:"t6", name:"念英文",          cat:"study", coins:10, limit:0, assignee:"both" },
-];
+// ── CONSTANTS ─────────────────────────────────────────────
+const STORAGE_KEY = "kidreward_v4"; // Never change this — preserves existing data
+const DAY_NAMES   = ["日","一","二","三","四","五","六"];
+const TODAY       = new Date().toDateString();
+const TODAY_DOW   = new Date().getDay(); // 0=Sun … 6=Sat
 
+const DEFAULT_TASKS = [
+  { id:"t1", name:"練習鋼琴20分鐘", cat:"study", coins:10, limit:1, assignee:"abby", days:[] },
+  { id:"t2", name:"練習鋼琴30分鐘", cat:"study", coins:20, limit:1, assignee:"abby", days:[] },
+  { id:"t3", name:"練習鋼琴40分鐘", cat:"study", coins:40, limit:1, assignee:"abby", days:[] },
+  { id:"t4", name:"運動1小時",       cat:"sport", coins:30, limit:1, assignee:"both", days:[] },
+  { id:"t5", name:"寫評量1回",       cat:"study", coins:10, limit:0, assignee:"both", days:[] },
+  { id:"t6", name:"念英文",          cat:"study", coins:10, limit:0, assignee:"both", days:[] },
+];
 const DEFAULT_REWARDS = [
   { id:"r1", emoji:"🎮", name:"打電動30分鐘", cost:50 },
 ];
-
 const PLAYERS = [
   { name:"Abby", avatar:"🥷", key:"abby" },
   { name:"Adam", avatar:"⚔️", key:"adam" },
 ];
-
 const CAT = {
   study: { cls:"tag-study", label:"學習", icon:"📚" },
   chore: { cls:"tag-chore", label:"家務", icon:"🏠" },
@@ -340,29 +424,59 @@ const CAT = {
 };
 
 // ── STATE ─────────────────────────────────────────────────
-// IMPORTANT: keep key "kidreward_v4" so existing phone data is preserved
-const TODAY = new Date().toDateString();
-let curPlayer = 0;
-let newTaskAssign  = "both";
-let deductTarget   = 0;
+let curPlayer     = 0;
+let newTaskAssign = "both";
+let wcAssign      = "both";
+let deductTarget  = 0;
+let newTaskDays   = []; // selected days for new task; empty = every day
 
+// Safe load: read existing data, then patch in any missing new fields
 function loadState() {
+  let s;
   try {
-    const raw = localStorage.getItem("kidreward_v4");
-    if (raw) return JSON.parse(raw);
-  } catch(e) {}
-  return {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    s = raw ? JSON.parse(raw) : null;
+  } catch(e) { s = null; }
+
+  if (!s) s = {
     tasks:   JSON.parse(JSON.stringify(DEFAULT_TASKS)),
     rewards: JSON.parse(JSON.stringify(DEFAULT_REWARDS)),
-    players: PLAYERS.map(() => ({ coins:0, earned:0, counts:{}, lastDay:"", history:[] }))
+    players: PLAYERS.map(() => freshPlayer()),
+    weeklyChallenge: null,   // { name, target, bonus, assignee, progress:{abby:0,adam:0}, weekStart, claimed:{abby:false,adam:false} }
+    weeklyReports:   [],     // array of report snapshots
   };
+
+  // Migrate: patch missing top-level fields without touching existing data
+  if (!s.weeklyChallenge) s.weeklyChallenge = null;
+  if (!s.weeklyReports)   s.weeklyReports   = [];
+
+  // Migrate: patch missing player fields
+  while (s.players.length < PLAYERS.length) s.players.push(freshPlayer());
+  s.players.forEach(p => {
+    if (!p.counts)  p.counts  = {};
+    if (!p.earned)  p.earned  = 0;
+    if (!p.history) p.history = [];
+    if (!p.lastDay) p.lastDay = "";
+    // weekEarned is derived each week, no migration needed
+  });
+
+  // Migrate: patch missing task fields (days array for existing tasks)
+  if (s.tasks) s.tasks.forEach(t => {
+    if (!t.days) t.days = []; // empty = show every day
+  });
+
+  return s;
 }
 
-function persist() { localStorage.setItem("kidreward_v4", JSON.stringify(state)); }
+function freshPlayer() {
+  return { coins:0, earned:0, counts:{}, lastDay:"", history:[] };
+}
+
+function persist() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
 
 let state = loadState();
-while (state.players.length < PLAYERS.length)
-  state.players.push({ coins:0, earned:0, counts:{}, lastDay:"", history:[] });
 
 function resetDailyIfNeeded(ps) {
   if (ps.lastDay !== TODAY) { ps.counts = {}; ps.lastDay = TODAY; }
@@ -374,20 +488,19 @@ function switchPlayer(idx) {
   document.getElementById("p0-btn").classList.toggle("active", idx===0);
   document.getElementById("p1-btn").classList.toggle("active", idx===1);
   renderAll();
-  // If history tab is currently visible, refresh it too
   if (document.getElementById("page-history").classList.contains("active")) renderHistory();
 }
 
-
 function showPage(name) {
-  ["tasks","rewards","history"].forEach(p =>
+  ["tasks","rewards","history","report"].forEach(p =>
     document.getElementById("page-"+p).classList.toggle("active", p===name));
   document.querySelectorAll(".tab").forEach((t,i) =>
-    t.classList.toggle("active", ["tasks","rewards","history"][i]===name));
-  if (name === "history") renderHistory();
+    t.classList.toggle("active", ["tasks","rewards","history","report"][i]===name));
+  if (name==="history") renderHistory();
+  if (name==="report")  renderReport();
 }
 
-// ── RENDER ────────────────────────────────────────────────
+// ── RENDER ALL ────────────────────────────────────────────
 function renderAll() {
   const ps = state.players[curPlayer];
   resetDailyIfNeeded(ps);
@@ -401,26 +514,166 @@ function renderAll() {
   document.getElementById("cur-sub").textContent =
     totalCheckins > 0 ? `今日已打卡 ${totalCheckins} 次！` : "今日任務進行中";
 
-  state.players.forEach((sp,i) => {
-    document.getElementById("p"+i+"-coins").textContent = "💰 " + sp.coins;
-  });
+  state.players.forEach((sp,i) =>
+    document.getElementById("p"+i+"-coins").textContent = "💰 " + sp.coins);
 
+  renderChallenge();
   renderTasks();
   renderRewards();
 }
 
+// ── WEEKLY CHALLENGE ──────────────────────────────────────
+function getWeekStart() {
+  // Monday-based week start, returns "YYYY-MM-DD" string
+  const d = new Date();
+  const day = d.getDay(); // 0=Sun
+  const diff = day === 0 ? -6 : 1 - day;
+  d.setDate(d.getDate() + diff);
+  return d.toDateString();
+}
+
+function renderChallenge() {
+  const el  = document.getElementById("challenge-area");
+  const wc  = state.weeklyChallenge;
+  const pkey = PLAYERS[curPlayer].key;
+
+  if (!wc || (wc.assignee !== "both" && wc.assignee !== pkey)) {
+    el.innerHTML = `<button class="challenge-edit-btn" style="background:var(--purple-light);color:var(--purple);border:2px dashed var(--purple);border-radius:var(--radius);width:100%;padding:11px;font-size:14px;font-family:Nunito,sans-serif;cursor:pointer;margin-bottom:14px;font-weight:700;"
+      onclick="openChallenge()">🎯 設定本週挑戰</button>`;
+    return;
+  }
+
+  const prog    = Math.min((wc.progress||{})[pkey] || 0, wc.target);
+  const claimed = (wc.claimed||{})[pkey]  || false;
+  const pct     = Math.min(100, Math.round(prog / wc.target * 100));
+  const done    = prog >= wc.target;
+
+  el.innerHTML = `<div class="challenge-card">
+    <div class="challenge-label">本週挑戰</div>
+    <div class="challenge-name">${wc.name}</div>
+    <div class="challenge-progress-bar">
+      <div class="challenge-progress-fill" style="width:${pct}%"></div>
+    </div>
+    <div class="challenge-meta">
+      <span>${prog} / ${wc.target} 次完成</span>
+      <span>獎勵 💰 ${wc.bonus}</span>
+    </div>
+    ${done && !claimed
+      ? `<button class="challenge-edit-btn" style="background:var(--gold);color:var(--gold-dark);font-size:13px;" onclick="claimChallenge()">🎉 領取獎勵！</button>`
+      : done && claimed
+        ? `<span class="challenge-done-badge">✅ 已領取獎勵</span>`
+        : ''
+    }
+    <button class="challenge-edit-btn" onclick="openChallenge()" style="margin-top:${done?'6':'8'}px;">✏️ 編輯挑戰</button>
+  </div>`;
+}
+
+function openChallenge() {
+  const wc = state.weeklyChallenge;
+  document.getElementById("wc-name").value   = wc ? wc.name   : "";
+  document.getElementById("wc-target").value = wc ? wc.target : "5";
+  document.getElementById("wc-bonus").value  = wc ? wc.bonus  : "50";
+  setWcAssign(wc ? wc.assignee : "both");
+  // Populate task dropdown with current tasks
+  const sel = document.getElementById("wc-task");
+  sel.innerHTML = '<option value="">── 任何任務都計入 ──</option>';
+  state.tasks.forEach(t => {
+    const opt = document.createElement("option");
+    opt.value = t.id;
+    opt.textContent = t.name;
+    if (wc && wc.taskId === t.id) opt.selected = true;
+    sel.appendChild(opt);
+  });
+  if (wc && !wc.taskId) sel.value = "";
+  document.getElementById("challenge-overlay").classList.add("open");
+}
+
+function setWcAssign(val) {
+  wcAssign = val;
+  ["both","abby","adam"].forEach(k =>
+    document.getElementById("wc-asgn-"+k).classList.toggle("sel", k===val));
+}
+
+function saveChallenge() {
+  const name   = document.getElementById("wc-name").value.trim();
+  const target = parseInt(document.getElementById("wc-target").value)||5;
+  const bonus  = parseInt(document.getElementById("wc-bonus").value)||50;
+  const taskId = document.getElementById("wc-task").value || null; // null = any task
+  if (!name) { alert("請輸入挑戰名稱"); return; }
+
+  const existing = state.weeklyChallenge;
+  // Reset progress if task filter changed (different task = different count)
+  const sameWeek = existing && existing.weekStart === getWeekStart();
+  const sameTask = sameWeek && existing.taskId === taskId;
+  state.weeklyChallenge = {
+    name, target, bonus, taskId,
+    assignee:  wcAssign,
+    weekStart: getWeekStart(),
+    progress: sameTask ? (existing.progress||{}) : {},
+    claimed:  sameWeek ? (existing.claimed||{})  : {},
+  };
+  persist(); closeOverlays(); renderChallenge();
+  showToast("每週挑戰已儲存！");
+}
+
+function clearChallenge() {
+  state.weeklyChallenge = null;
+  persist(); closeOverlays(); renderChallenge();
+  showToast("挑戰已刪除");
+}
+
+function claimChallenge() {
+  const wc   = state.weeklyChallenge;
+  const pkey = PLAYERS[curPlayer].key;
+  if (!wc || (wc.claimed||{})[pkey]) return;
+  const ps = state.players[curPlayer];
+
+  // Add bonus coins and push to history
+  ps.coins  += wc.bonus;
+  ps.earned  = (ps.earned||0) + wc.bonus;
+  ps.history.push({ label:`🎯 完成挑戰：${wc.name}`, delta:wc.bonus, time:timeStr() });
+
+  // Check if all eligible players have now claimed — if so, clear the challenge
+  const allPlayers = wc.assignee === "both"
+    ? ["abby","adam"]
+    : [wc.assignee];
+  if (!wc.claimed) wc.claimed = {};
+  wc.claimed[pkey] = true;
+  const allClaimed = allPlayers.every(k => wc.claimed[k]);
+  if (allClaimed) state.weeklyChallenge = null; // Remove challenge once everyone claimed
+
+  persist(); renderAll();
+  // Also refresh history tab if it is open
+  if (document.getElementById("page-history").classList.contains("active")) renderHistory();
+  showToast(`🎉 領到 ${wc.bonus} 💰 挑戰獎勵！`);
+}
+
+// ── TASKS ─────────────────────────────────────────────────
 function renderTasks() {
   const ps   = state.players[curPlayer];
   const pkey = PLAYERS[curPlayer].key;
   const el   = document.getElementById("task-list");
-  const visible = state.tasks.filter(t => t.assignee==="both" || t.assignee===pkey);
 
-  if (!visible.length) {
+  // Filter by assignee and by today's day-of-week
+  const visible = state.tasks.filter(t => {
+    if (t.assignee !== "both" && t.assignee !== pkey) return false;
+    if (t.days && t.days.length > 0 && !t.days.includes(TODAY_DOW)) return false;
+    return true;
+  });
+
+  // Also show tasks that are today-inactive (different day) but have been done today
+  const inactiveToday = state.tasks.filter(t => {
+    if (t.assignee !== "both" && t.assignee !== pkey) return false;
+    if (!t.days || t.days.length === 0) return false;
+    return !t.days.includes(TODAY_DOW);
+  });
+
+  if (!visible.length && !inactiveToday.length) {
     el.innerHTML = `<div class="empty-msg">還沒有任務，點下方新增吧！</div>`;
     return;
   }
 
-  el.innerHTML = visible.map(t => {
+  const buildCard = (t, inactive) => {
     const c     = CAT[t.cat] || CAT.other;
     const done  = ps.counts[t.id] || 0;
     const lim   = t.limit || 0;
@@ -430,8 +683,11 @@ function renderTasks() {
       : t.assignee==="abby"
         ? `<span class="tag tag-abby">Abby</span>`
         : `<span class="tag tag-adam">Adam</span>`;
+    const dayTags = (t.days && t.days.length > 0)
+      ? `<div class="day-pills-display">${t.days.map(d=>`<span class="day-tag">週${DAY_NAMES[d]}</span>`).join('')}</div>`
+      : '';
 
-    return `<div class="task-card">
+    return `<div class="task-card ${inactive?'inactive':''}">
       <div class="task-icon">${c.icon}</div>
       <div class="task-left">
         <div class="task-tags">
@@ -440,22 +696,29 @@ function renderTasks() {
         </div>
         <div class="task-name">${t.name}</div>
         <div class="task-meta">💰 ${t.coins} 金幣／次 · ${lim>0?'上限'+lim+'次':'無限次'}</div>
+        ${dayTags}
       </div>
       <div class="task-right">
         <div class="count-row">
           ${done>0 ? `<span class="count-badge">✓ ${done}次</span>` : ''}
           ${lim>0  ? `<span class="limit-badge">/${lim}</span>` : ''}
         </div>
-        <button class="checkin-btn ${maxed?'maxed':''}"
-          ${maxed?'disabled':`onclick="checkin('${t.id}')"`}>
-          ${maxed?'已達上限':'打卡＋'}
-        </button>
+        ${inactive
+          ? `<button class="checkin-btn maxed">今日無此任務</button>`
+          : `<button class="checkin-btn ${maxed?'maxed':''}"
+              ${maxed?'disabled':`onclick="checkin('${t.id}')"`}>
+              ${maxed?'已達上限':'打卡＋'}
+            </button>`
+        }
       </div>
       <button class="delete-btn" onclick="deleteTask('${t.id}')" title="刪除">✕</button>
     </div>`;
-  }).join("");
+  };
+
+  el.innerHTML = visible.map(t => buildCard(t, false)).join("");
 }
 
+// ── REWARDS ───────────────────────────────────────────────
 function renderRewards() {
   const ps = state.players[curPlayer];
   const el = document.getElementById("reward-list");
@@ -473,8 +736,7 @@ function renderRewards() {
       </div>
       <div class="reward-btns">
         <button class="delete-btn" onclick="deleteReward('${r.id}')" title="刪除">✕</button>
-        <button class="redeem-btn" ${can?'':'disabled'}
-          onclick="redeem('${r.id}','${r.name}',${r.cost})">
+        <button class="redeem-btn" ${can?'':'disabled'} onclick="redeem('${r.id}','${r.name}',${r.cost})">
           ${can?'兌換':'不足'}
         </button>
       </div>
@@ -482,19 +744,14 @@ function renderRewards() {
   }).join("");
 }
 
+// ── HISTORY ───────────────────────────────────────────────
 function renderHistory() {
   const ps = state.players[curPlayer];
   resetDailyIfNeeded(ps);
-
-  // Stats
   const totalCheckins = Object.values(ps.counts||{}).reduce((a,b)=>a+b,0);
   document.getElementById("stat-total").textContent = ps.earned||0;
   document.getElementById("stat-tasks").textContent = totalCheckins;
-
-  // Draw chart
   drawChart(ps);
-
-  // History list
   const items = (ps.history||[]).slice().reverse().slice(0,30);
   const el = document.getElementById("history-list");
   if (!items.length) { el.innerHTML=`<div class="empty-msg">還沒有紀錄喔！</div>`; return; }
@@ -511,11 +768,9 @@ function renderHistory() {
 
 // ── LINE CHART ────────────────────────────────────────────
 function getLast14DayLabels() {
-  // Returns array of "M/D" strings for past 14 days (oldest first)
   const days = [];
   for (let i = 13; i >= 0; i--) {
-    const d = new Date();
-    d.setDate(d.getDate() - i);
+    const d = new Date(); d.setDate(d.getDate() - i);
     days.push(`${d.getMonth()+1}/${d.getDate()}`);
   }
   return days;
@@ -523,89 +778,153 @@ function getLast14DayLabels() {
 
 function buildChartData(ps) {
   const labels = getLast14DayLabels();
-  // Sum net delta per day from history
   const netByDay = {};
   labels.forEach(l => netByDay[l] = 0);
   (ps.history||[]).forEach(h => {
     if (!h.time) return;
-    const datepart = h.time.split(' ')[0]; // e.g. "4/26"
-    if (datepart in netByDay) netByDay[datepart] += h.delta;
+    const dp = h.time.split(' ')[0];
+    if (dp in netByDay) netByDay[dp] += h.delta;
   });
-  return labels.map(l => ({ label: l, val: netByDay[l] }));
+  return labels.map(l => ({ label:l, val:netByDay[l] }));
 }
 
 function drawChart(ps) {
-  const data  = buildChartData(ps);
-  const svg   = document.getElementById("coin-chart");
-  const W = 340, H = 140;
-  const padL = 32, padR = 10, padT = 16, padB = 28;
-  const chartW = W - padL - padR;
-  const chartH = H - padT - padB;
-
-  const vals = data.map(d => d.val);
-  const maxV = Math.max(...vals, 1);
-  const minV = Math.min(...vals, 0);
-  const range = maxV - minV || 1;
-
-  // Helper: map value to Y coordinate
-  const toY = v => padT + chartH - ((v - minV) / range) * chartH;
-  // Helper: map index to X coordinate
-  const toX = i => padL + (i / (data.length - 1)) * chartW;
-
-  // Build polyline points
-  const pts = data.map((d,i) => `${toX(i).toFixed(1)},${toY(d.val).toFixed(1)}`).join(' ');
-
-  // Zero line Y
+  const data = buildChartData(ps);
+  const svg  = document.getElementById("coin-chart");
+  const W=340, H=140, padL=32, padR=10, padT=16, padB=28;
+  const chartW=W-padL-padR, chartH=H-padT-padB;
+  const vals = data.map(d=>d.val);
+  const maxV = Math.max(...vals,1), minV = Math.min(...vals,0);
+  const range = maxV-minV||1;
+  const toY = v => padT+chartH-((v-minV)/range)*chartH;
+  const toX = i => padL+(i/(data.length-1))*chartW;
+  const pts  = data.map((d,i)=>`${toX(i).toFixed(1)},${toY(d.val).toFixed(1)}`).join(' ');
   const zeroY = toY(0).toFixed(1);
-
-  // Tick labels: show every other label to avoid crowding
-  const tickLabels = data.map((d,i) => {
-    if (i % 2 !== 0) return '';
-    return `<text x="${toX(i).toFixed(1)}" y="${H - 6}" text-anchor="middle"
-      font-size="9" fill="#7a9e9b" font-family="Nunito,sans-serif">${d.label}</text>`;
-  }).join('');
-
-  // Dot circles
-  const dots = data.map((d,i) => {
-    const cx = toX(i).toFixed(1);
-    const cy = toY(d.val).toFixed(1);
-    const color = d.val >= 0 ? '#2ec4b6' : '#e55';
-    return `<circle cx="${cx}" cy="${cy}" r="3.5" fill="${color}" stroke="white" stroke-width="1.5"/>`;
-  }).join('');
-
-  // Value labels on dots (show only non-zero)
-  const valLabels = data.map((d,i) => {
-    if (d.val === 0) return '';
-    const cx = toX(i).toFixed(1);
-    const cy = (toY(d.val) - 8).toFixed(1);
-    const color = d.val >= 0 ? '#1a9e92' : '#c53030';
-    return `<text x="${cx}" y="${cy}" text-anchor="middle"
-      font-size="9" font-weight="800" fill="${color}" font-family="Nunito,sans-serif">${d.val>0?'+':''}${d.val}</text>`;
-  }).join('');
-
+  const ticks = data.map((d,i) => i%2!==0?'' :
+    `<text x="${toX(i).toFixed(1)}" y="${H-6}" text-anchor="middle" font-size="9" fill="#7a9e9b" font-family="Nunito,sans-serif">${d.label}</text>`).join('');
+  const dots = data.map((d,i) =>
+    `<circle cx="${toX(i).toFixed(1)}" cy="${toY(d.val).toFixed(1)}" r="3.5" fill="${d.val>=0?'#2ec4b6':'#e55'}" stroke="white" stroke-width="1.5"/>`).join('');
+  const valLabels = data.map((d,i) => d.val===0?'' :
+    `<text x="${toX(i).toFixed(1)}" y="${(toY(d.val)-8).toFixed(1)}" text-anchor="middle" font-size="9" font-weight="800" fill="${d.val>=0?'#1a9e92':'#c53030'}" font-family="Nunito,sans-serif">${d.val>0?'+':''}${d.val}</text>`).join('');
   svg.innerHTML = `
-    <!-- Grid line at zero -->
-    <line x1="${padL}" y1="${zeroY}" x2="${W-padR}" y2="${zeroY}"
-      stroke="#d4eeeb" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <line x1="${padL}" y1="${zeroY}" x2="${W-padR}" y2="${zeroY}" stroke="#d4eeeb" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2ec4b6" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#2ec4b6" stop-opacity="0.02"/>
+    </linearGradient></defs>
+    <polygon points="${pts} ${toX(data.length-1).toFixed(1)},${zeroY} ${toX(0).toFixed(1)},${zeroY}" fill="url(#ag)"/>
+    <polyline points="${pts}" fill="none" stroke="#2ec4b6" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+    ${dots}${valLabels}${ticks}`;
+}
 
-    <!-- Filled area under line -->
-    <defs>
-      <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#2ec4b6" stop-opacity="0.18"/>
-        <stop offset="100%" stop-color="#2ec4b6" stop-opacity="0.02"/>
-      </linearGradient>
-    </defs>
-    <polygon points="${pts} ${toX(data.length-1).toFixed(1)},${zeroY} ${toX(0).toFixed(1)},${zeroY}"
-      fill="url(#areaGrad)"/>
+// ── WEEKLY REPORT ─────────────────────────────────────────
+// Auto-generate every Saturday at 22:00
+function checkAutoReport() {
+  const now = new Date();
+  // 6 = Saturday, hour >= 22
+  if (now.getDay() !== 6 || now.getHours() < 22) return;
+  const weekKey = getWeekStart();
+  const already = (state.weeklyReports||[]).some(r => r.weekStart === weekKey);
+  if (already) return;
+  generateReport(true);
+}
 
-    <!-- Line -->
-    <polyline points="${pts}"
-      fill="none" stroke="#2ec4b6" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+function generateReport(auto=false) {
+  const weekKey = getWeekStart();
+  // Calculate this week's earnings from history
+  const weekStart = new Date(weekKey);
+  const weekLabels = [];
+  for (let i=0;i<7;i++) {
+    const d = new Date(weekStart); d.setDate(d.getDate()+i);
+    weekLabels.push(`${d.getMonth()+1}/${d.getDate()}`);
+  }
 
-    ${dots}
-    ${valLabels}
-    ${tickLabels}
-  `;
+  const summary = PLAYERS.map((p,i) => {
+    const ps = state.players[i];
+    let earned=0, checkins=0, redeemed=0;
+    (ps.history||[]).forEach(h => {
+      if (!h.time) return;
+      const dp = h.time.split(' ')[0];
+      if (!weekLabels.includes(dp)) return;
+      if (h.delta > 0) { earned += h.delta; checkins++; }
+      else redeemed += Math.abs(h.delta);
+    });
+    return { name:p.name, avatar:p.avatar, earned, checkins, redeemed };
+  });
+
+  // Avoid duplicate for same week
+  const existing = (state.weeklyReports||[]).findIndex(r => r.weekStart === weekKey);
+  const report = { weekStart: weekKey, summary, createdAt: timeStr() };
+  if (existing >= 0) state.weeklyReports[existing] = report;
+  else { if (!state.weeklyReports) state.weeklyReports=[]; state.weeklyReports.unshift(report); }
+
+  // Keep last 8 weeks only
+  if (state.weeklyReports.length > 8) state.weeklyReports = state.weeklyReports.slice(0,8);
+  persist();
+  if (!auto) { renderReport(); showToast("週報已產生！"); }
+}
+
+function renderReport() {
+  const el = document.getElementById("report-list");
+  const reports = state.weeklyReports||[];
+  if (!reports.length) {
+    el.innerHTML = `<div class="empty-msg">還沒有週報，點「立即產生」按鈕試試！<br><br>每週六晚上10點會自動產生。</div>`;
+    return;
+  }
+  el.innerHTML = reports.map(r => {
+    const ws = new Date(r.weekStart);
+    const we = new Date(r.weekStart); we.setDate(we.getDate()+6);
+    const label = `${ws.getMonth()+1}/${ws.getDate()} – ${we.getMonth()+1}/${we.getDate()}`;
+    return `<div class="report-card">
+      <div class="report-week">📅 ${label}</div>
+      ${r.summary.map(s => `
+        <div class="report-row">
+          <span class="report-player">${s.avatar} ${s.name}</span>
+          <div class="report-nums">
+            <span>打卡 <span>${s.checkins}</span> 次</span>
+            <span>賺 <span>${s.earned}</span> 💰</span>
+            <span>兌換 <span>${s.redeemed}</span> 💰</span>
+          </div>
+        </div>`).join('')}
+    </div>`;
+  }).join("");
+}
+
+// ── BACKUP / RESTORE ──────────────────────────────────────
+function exportBackup() {
+  const data = localStorage.getItem(STORAGE_KEY)||"{}";
+  const blob = new Blob([data], {type:"application/json"});
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement("a");
+  const d    = new Date();
+  a.href     = url;
+  a.download = `kids-reward-backup-${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast("備份已下載！");
+}
+
+function importBackup(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const imported = JSON.parse(e.target.result);
+      // Validate basic structure before importing
+      if (!imported.players || !Array.isArray(imported.players))
+        throw new Error("格式不符");
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(imported));
+      state = loadState();
+      renderAll();
+      renderReport();
+      showToast("✅ 資料還原成功！");
+    } catch(err) {
+      alert("還原失敗：檔案格式不正確");
+    }
+    event.target.value = ""; // Reset input
+  };
+  reader.readAsText(file);
 }
 
 // ── ACTIONS ───────────────────────────────────────────────
@@ -621,11 +940,24 @@ function checkin(tid) {
   ps.counts[tid] = done + 1;
   ps.coins  += task.coins;
   ps.earned  = (ps.earned||0) + task.coins;
-  ps.history = ps.history||[];
-  ps.history.push({
-    label: `完成：${task.name}（第${ps.counts[tid]}次）`,
-    delta: task.coins, time: timeStr()
-  });
+  ps.history.push({ label:`完成：${task.name}（第${ps.counts[tid]}次）`, delta:task.coins, time:timeStr() });
+
+  // Update weekly challenge progress — only if task matches (or no filter set)
+  const wc   = state.weeklyChallenge;
+  const pkey = PLAYERS[curPlayer].key;
+  if (wc && (wc.assignee==="both" || wc.assignee===pkey) && wc.weekStart===getWeekStart()) {
+    const taskMatches = !wc.taskId || wc.taskId === tid;
+    const alreadyClaimed = (wc.claimed||{})[pkey];
+    // Only accumulate if task matches, not yet claimed, and not over target
+    if (taskMatches && !alreadyClaimed) {
+      if (!wc.progress) wc.progress = {};
+      const current = wc.progress[pkey]||0;
+      if (current < wc.target) {
+        wc.progress[pkey] = current + 1;
+      }
+    }
+  }
+
   persist(); renderAll();
   showToast(`+${task.coins} 💰  打卡成功！`);
 }
@@ -634,7 +966,6 @@ function redeem(rid, name, cost) {
   const ps = state.players[curPlayer];
   if (ps.coins < cost) return;
   ps.coins -= cost;
-  ps.history = ps.history||[];
   ps.history.push({ label:"兌換："+name, delta:-cost, time:timeStr() });
   persist(); renderAll();
   showToast("🎉 兌換成功：" + name);
@@ -652,7 +983,7 @@ function deleteReward(rid) {
   persist(); renderRewards();
 }
 
-// ── DEDUCT COINS ──────────────────────────────────────────
+// ── DEDUCT ────────────────────────────────────────────────
 function setDeductTarget(idx) {
   deductTarget = idx;
   document.getElementById("dq-abby").classList.toggle("sel", idx===0);
@@ -660,11 +991,9 @@ function setDeductTarget(idx) {
 }
 
 function openDeduct() {
-  // Show current coins for both players in the panel
   document.getElementById("dq-abby-coins").textContent = state.players[0].coins;
   document.getElementById("dq-adam-coins").textContent = state.players[1].coins;
-  deductTarget = curPlayer;
-  setDeductTarget(curPlayer);
+  deductTarget = curPlayer; setDeductTarget(curPlayer);
   document.getElementById("deduct-amount").value = "10";
   document.getElementById("deduct-reason").value = "";
   document.getElementById("deduct-overlay").classList.add("open");
@@ -674,19 +1003,15 @@ function confirmDeduct() {
   const ps     = state.players[deductTarget];
   const amount = parseInt(document.getElementById("deduct-amount").value)||0;
   const reason = document.getElementById("deduct-reason").value.trim();
-  if (amount <= 0) { alert("請輸入扣除金額"); return; }
-  if (amount > ps.coins) { alert(`${PLAYERS[deductTarget].name} 金幣不足！目前只有 ${ps.coins} 金幣`); return; }
+  if (amount<=0) { alert("請輸入扣除金額"); return; }
+  if (amount>ps.coins) { alert(`${PLAYERS[deductTarget].name} 金幣不足！目前只有 ${ps.coins} 金幣`); return; }
   ps.coins -= amount;
-  ps.history = ps.history||[];
-  ps.history.push({
-    label: reason ? `家長扣除：${reason}` : "家長扣除金幣",
-    delta: -amount, time: timeStr()
-  });
+  ps.history.push({ label:reason?`家長扣除：${reason}`:"家長扣除金幣", delta:-amount, time:timeStr() });
   persist(); closeOverlays(); renderAll();
   showToast(`${PLAYERS[deductTarget].name} 已扣除 ${amount} 💰`);
 }
 
-// ── RESET TODAY ───────────────────────────────────────────
+// ── RESET ─────────────────────────────────────────────────
 function openReset() {
   document.getElementById("reset-player-name").textContent = PLAYERS[curPlayer].name;
   document.getElementById("reset-overlay").classList.add("open");
@@ -694,11 +1019,8 @@ function openReset() {
 
 function confirmReset() {
   const ps = state.players[curPlayer];
-  ps.counts  = {};
-  ps.lastDay = TODAY;
-  persist(); closeOverlays();
-  renderAll();
-  renderHistory();
+  ps.counts = {}; ps.lastDay = TODAY;
+  persist(); closeOverlays(); renderAll(); renderHistory();
   showToast(`${PLAYERS[curPlayer].name} 今日打卡已重置`);
 }
 
@@ -710,12 +1032,28 @@ function setAssign(val) {
 }
 
 function openAddTask() {
+  newTaskDays = [];
   document.getElementById("nt-name").value  = "";
   document.getElementById("nt-coins").value = "10";
   document.getElementById("nt-limit").value = "0";
+  document.querySelectorAll("#nt-days .day-pill").forEach(b => b.classList.remove("on"));
   setAssign("both");
   document.getElementById("task-overlay").classList.add("open");
 }
+
+// Toggle day pill selection
+document.querySelectorAll("#nt-days .day-pill").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const d = parseInt(btn.dataset.d);
+    if (newTaskDays.includes(d)) {
+      newTaskDays = newTaskDays.filter(x=>x!==d);
+      btn.classList.remove("on");
+    } else {
+      newTaskDays.push(d);
+      btn.classList.add("on");
+    }
+  });
+});
 
 function saveNewTask() {
   const name  = document.getElementById("nt-name").value.trim();
@@ -723,7 +1061,7 @@ function saveNewTask() {
   const coins = parseInt(document.getElementById("nt-coins").value)||10;
   const limit = Math.max(0, parseInt(document.getElementById("nt-limit").value)||0);
   if (!name) { alert("請輸入任務名稱"); return; }
-  state.tasks.push({ id:"t"+Date.now(), name, cat, coins, limit, assignee:newTaskAssign });
+  state.tasks.push({ id:"t"+Date.now(), name, cat, coins, limit, assignee:newTaskAssign, days:[...newTaskDays].sort() });
   persist(); closeOverlays(); renderTasks();
   showToast("任務已新增！");
 }
@@ -758,14 +1096,15 @@ function timeStr() {
 
 function showToast(msg) {
   const t = document.getElementById("toast");
-  t.textContent = msg;
-  t.classList.add("show");
+  t.textContent = msg; t.classList.add("show");
   setTimeout(()=>t.classList.remove("show"), 2200);
 }
 
 document.querySelectorAll(".admin-overlay").forEach(o =>
   o.addEventListener("click", e=>{ if(e.target===o) closeOverlays(); }));
 
+// ── INIT ──────────────────────────────────────────────────
+checkAutoReport(); // Check if Saturday 22:00, auto-generate report
 renderAll();
 </script>
 </body>
