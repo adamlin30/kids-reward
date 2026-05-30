@@ -234,14 +234,8 @@
   <div id="page-report" class="page">
     <div class="section-title">📊 每週報告</div>
     <div id="report-list"></div>
-    <div style="display:flex;gap:10px;margin-top:4px;">
-      <button class="outline-btn" onclick="generateReport()" style="flex:1;">🔄 立即產生本週報告</button>
-      <button class="outline-btn" onclick="exportBackup()" style="flex:1;">💾 備份資料</button>
-    </div>
-    <div style="margin-top:4px;">
-      <button class="outline-btn" onclick="document.getElementById('import-file').click()">📂 從備份還原</button>
-      <input type="file" id="import-file" accept=".json" style="display:none" onchange="importBackup(event)"/>
-    </div>
+    <button class="outline-btn" onclick="generateReport()">🔄 立即產生本週報告</button>
+    <button class="outline-btn" style="background:#e0f7f5;border-color:var(--teal);color:var(--teal-dark);font-size:15px;" onclick="openBackupPanel()">💾 備份 / 還原資料</button>
   </div>
 
 </div>
@@ -389,6 +383,34 @@
     <button class="admin-save" onclick="saveChallenge()">儲存挑戰</button>
     <button class="admin-save danger" style="margin-top:8px;" onclick="clearChallenge()">刪除本週挑戰</button>
     <button class="admin-cancel" onclick="closeOverlays()">取消</button>
+  </div>
+</div>
+
+<!-- ── Backup / Restore Panel ── -->
+<div class="admin-overlay" id="backup-overlay">
+  <div class="admin-panel">
+    <div class="admin-title">💾 備份 / 還原資料</div>
+
+    <div class="admin-row">
+      <label>📤 備份 — 複製下方備份碼，貼到備忘錄保存</label>
+      <textarea id="backup-code-out" readonly
+        style="font-size:11px;word-break:break-all;height:100px;background:#f8f8f8;color:#555;"
+        placeholder="點下方按鈕產生備份碼…"></textarea>
+      <div class="hint">備份碼包含所有金幣、任務、歷史紀錄</div>
+    </div>
+    <button class="admin-save" onclick="copyBackupCode()">📋 複製備份碼</button>
+
+    <div style="margin:20px 0 10px;border-top:1.5px solid var(--border);"></div>
+
+    <div class="admin-row">
+      <label>📥 還原 — 從備忘錄貼上備份碼</label>
+      <textarea id="restore-code-in"
+        style="font-size:11px;word-break:break-all;height:100px;"
+        placeholder="將備份碼貼在這裡…"></textarea>
+    </div>
+    <button class="admin-save danger" onclick="restoreFromCode()">⚠️ 確認還原（會覆蓋現有資料）</button>
+
+    <button class="admin-cancel" onclick="closeOverlays()">關閉</button>
   </div>
 </div>
 
@@ -891,40 +913,53 @@ function renderReport() {
 }
 
 // ── BACKUP / RESTORE ──────────────────────────────────────
-function exportBackup() {
-  const data = localStorage.getItem(STORAGE_KEY)||"{}";
-  const blob = new Blob([data], {type:"application/json"});
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement("a");
-  const d    = new Date();
-  a.href     = url;
-  a.download = `kids-reward-backup-${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}.json`;
-  a.click();
-  URL.revokeObjectURL(url);
-  showToast("備份已下載！");
+// ── BACKUP PANEL (iPhone-friendly: copy/paste approach) ──
+function openBackupPanel() {
+  // Generate backup code from current state
+  const raw  = JSON.stringify(state);
+  const code = btoa(encodeURIComponent(raw)); // base64 encode
+  document.getElementById("backup-code-out").value = code;
+  document.getElementById("restore-code-in").value = "";
+  document.getElementById("backup-overlay").classList.add("open");
 }
 
-function importBackup(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    try {
-      const imported = JSON.parse(e.target.result);
-      // Validate basic structure before importing
-      if (!imported.players || !Array.isArray(imported.players))
-        throw new Error("格式不符");
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(imported));
-      state = loadState();
-      renderAll();
-      renderReport();
-      showToast("✅ 資料還原成功！");
-    } catch(err) {
-      alert("還原失敗：檔案格式不正確");
-    }
-    event.target.value = ""; // Reset input
-  };
-  reader.readAsText(file);
+function copyBackupCode() {
+  const code = document.getElementById("backup-code-out").value;
+  if (!code) return;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(code)
+      .then(() => showToast("✅ 備份碼已複製！請貼到備忘錄"))
+      .catch(() => fallbackCopy(code));
+  } else {
+    fallbackCopy(code);
+  }
+}
+
+function fallbackCopy(text) {
+  // Select the textarea so user can manually copy
+  const ta = document.getElementById("backup-code-out");
+  ta.focus(); ta.select();
+  try { document.execCommand("copy"); showToast("✅ 已複製！請貼到備忘錄"); }
+  catch(e) { showToast("請手動長按文字框全選並複製"); }
+}
+
+function restoreFromCode() {
+  const code = document.getElementById("restore-code-in").value.trim();
+  if (!code) { alert("請先貼上備份碼"); return; }
+  try {
+    const raw      = decodeURIComponent(atob(code));
+    const imported = JSON.parse(raw);
+    if (!imported.players || !Array.isArray(imported.players))
+      throw new Error("格式不符");
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(imported));
+    state = loadState();
+    closeOverlays();
+    renderAll();
+    renderReport();
+    showToast("✅ 資料還原成功！");
+  } catch(e) {
+    alert("還原失敗：備份碼格式不正確，請重新複製完整的備份碼");
+  }
 }
 
 // ── ACTIONS ───────────────────────────────────────────────
