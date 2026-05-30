@@ -396,7 +396,7 @@
       <textarea id="backup-code-out" readonly
         style="font-size:11px;word-break:break-all;height:100px;background:#f8f8f8;color:#555;"
         placeholder="點下方按鈕產生備份碼…"></textarea>
-      <div class="hint">備份碼包含所有金幣、任務、歷史紀錄</div>
+      <div class="hint" id="backup-size-info">備份碼包含所有金幣、任務、最近90天歷史紀錄</div>
     </div>
     <button class="admin-save" onclick="copyBackupCode()">📋 複製備份碼</button>
 
@@ -915,11 +915,36 @@ function renderReport() {
 // ── BACKUP / RESTORE ──────────────────────────────────────
 // ── BACKUP PANEL (iPhone-friendly: copy/paste approach) ──
 function openBackupPanel() {
-  // Generate backup code from current state
-  const raw  = JSON.stringify(state);
+  // Build a trimmed copy: keep all data but limit each player's history to 90 days
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - 90);
+
+  const trimmed = JSON.parse(JSON.stringify(state)); // deep clone
+  trimmed.players.forEach(ps => {
+    if (!ps.history) return;
+    // Parse "M/D HH:MM" to filter — keep entries within 90 days
+    ps.history = ps.history.filter(h => {
+      if (!h.time) return true; // keep entries with no timestamp
+      try {
+        const [datePart] = h.time.split(" ");
+        const [m, d]     = datePart.split("/").map(Number);
+        const year       = new Date().getFullYear();
+        const entryDate  = new Date(year, m - 1, d);
+        // Handle year boundary (e.g. entry is Dec, today is Jan)
+        if (entryDate > new Date()) entryDate.setFullYear(year - 1);
+        return entryDate >= cutoff;
+      } catch(e) { return true; }
+    });
+  });
+
+  const raw  = JSON.stringify(trimmed);
   const code = btoa(encodeURIComponent(raw)); // base64 encode
   document.getElementById("backup-code-out").value = code;
   document.getElementById("restore-code-in").value = "";
+  // Show size info
+  const kb = (raw.length / 1024).toFixed(1);
+  document.getElementById("backup-size-info").textContent =
+    `備份碼大小：約 ${kb} KB（含最近 90 天紀錄）`;
   document.getElementById("backup-overlay").classList.add("open");
 }
 
